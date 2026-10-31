@@ -1,0 +1,220 @@
+/* =========================================================================
+   Toasts: signature Electric Lime. Lime fill, 2px ink border and the ink
+   offset shadow from the signature button; they lift on hover like buttons.
+   Every type shares the lime card; the ink icon tile and the small type
+   label carry the meaning (success / error / warning / info / loading).
+   Top-right under the header, newest first. Behaviour in src/toast.js.
+   ========================================================================= */
+.toasts {
+  position: fixed;
+  top: calc(var(--header-h) + 14px);
+  right: 20px;
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column-reverse;   /* DOM appends; newest shows on top */
+  gap: 12px;
+  width: min(400px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.toast {
+  --glyph: var(--lime);              /* icon colour inside the ink tile */
+  pointer-events: auto;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 12px 16px 14px;
+  border-radius: 16px;
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--panel) 38%, transparent), transparent 55%),
+    var(--lime);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-brut), var(--shadow-toast);
+  color: var(--on-accent);
+  animation: toast-enter 460ms var(--spring) both;
+  transform-origin: top right;
+  transition: transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
+}
+.toast:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-brut-hover), var(--shadow-toast-hover);
+}
+
+.toast.success { --glyph: var(--lime); }
+.toast.error   { --glyph: var(--pastel-blush); }
+.toast.warning { --glyph: var(--pastel-butter); }
+.toast.info    { --glyph: var(--bg); }
+.toast.busy    { --glyph: var(--lime); }
+
+.toast.error { animation: toast-enter 460ms var(--spring) both, toast-shake 420ms var(--ease) 460ms 1; }
+.toast.leaving { animation: toast-leave 240ms var(--ease-in) both; pointer-events: none; }
+
+/* ink icon tile */
+.toast-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  flex: none;
+  background: var(--ink);
+  color: var(--glyph);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--panel) 10%, transparent);
+}
+.toast-icon svg { width: 20px; height: 20px; stroke-width: 2.4; animation: toast-glyph 520ms var(--spring) 120ms both; }
+.toast.warning .toast-icon svg { animation: toast-glyph 520ms var(--spring) 120ms both, toast-wiggle 600ms var(--ease) 600ms 1; }
+.toast.success .toast-icon::after {                   /* one soft ring on success */
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  border: 2px solid var(--ink);
+  opacity: 0;
+  animation: toast-ring 700ms var(--ease-out) 200ms 1;
+}
+.toast-icon .spinner {
+  width: 18px;
+  height: 18px;
+  border-width: 2.5px;
+  border-color: color-mix(in srgb, var(--lime) 25%, transparent);
+  border-top-color: var(--lime);
+}
+
+/* text */
+.toast-body { flex: 1; min-width: 0; padding-top: 1px; }
+.toast-kind {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 7px;
+  margin-bottom: 4px;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--ink);
+  font: 700 10px/1 var(--font-ui);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--panel) 35%, transparent);
+}
+.toast.error .toast-kind { background: var(--ink); color: var(--pastel-blush); }
+.toast.warning .toast-kind { background: var(--ink); color: var(--pastel-butter); }
+.toast-body strong { display: block; font-size: 15px; font-weight: 650; line-height: 1.3; color: var(--ink); letter-spacing: var(--tracking-tight); }
+.toast-body p { margin: 3px 0 0; color: color-mix(in srgb, var(--ink) 78%, var(--lime)); font-size: var(--fs-sm); line-height: 1.45; overflow-wrap: anywhere; }
+
+/* determinate progress (flash / upload) */
+.toast-progress {
+  height: 8px;
+  margin-top: 10px;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--ink);
+  background: color-mix(in srgb, var(--panel) 40%, transparent);
+  overflow: hidden;
+}
+.toast-progress span {
+  display: block;
+  height: 100%;
+  background: repeating-linear-gradient(-45deg, var(--ink) 0 6px, color-mix(in srgb, var(--ink) 80%, var(--lime)) 6px 12px);
+  background-size: 34px 100%;
+  animation: toast-stripes 0.8s linear infinite;
+  transition: width 0.25s var(--ease);
+}
+
+/* action: inverse of the card (ink pill, lime text) */
+.toast-action {
+  margin-top: 10px;
+  height: 30px;
+  padding: 0 14px;
+  font: 700 var(--fs-xs)/1 var(--font-ui);
+  color: var(--lime);
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 0 color-mix(in srgb, var(--ink) 35%, transparent);
+  transition: transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
+}
+.toast-action:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 0 color-mix(in srgb, var(--ink) 40%, transparent); }
+.toast-action:active { transform: translate(1px, 1px); box-shadow: none; }
+.toast-action:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.toast-close {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: -2px -2px 0 0;
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: 9px;
+  transition: background var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
+}
+.toast-close:hover { background: color-mix(in srgb, var(--ink) 12%, transparent); transform: rotate(90deg); }
+.toast-close:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+
+/* countdown (pauses on hover) */
+.toast-timer {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 4px;
+  background: var(--ink);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+.toast.is-timed .toast-timer { animation: toast-timer var(--dur, 4000ms) linear both; }
+.toast:hover .toast-timer { animation-play-state: paused; }
+
+/* loading: indeterminate ink shimmer along the bottom edge */
+.toast-loading {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 4px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--ink) 15%, transparent);
+}
+.toast-loading::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 40%;
+  border-radius: 4px;
+  background: var(--ink);
+  animation: toast-indeterminate 1.1s var(--ease) infinite;
+}
+
+@keyframes toast-enter {
+  0%   { opacity: 0; transform: translateX(36px) scale(0.94); box-shadow: 0 0 0 0 var(--ink); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: none; box-shadow: var(--shadow-brut), var(--shadow-toast); }
+}
+@keyframes toast-leave {
+  to { opacity: 0; transform: translateX(40px) scale(0.96); box-shadow: 0 0 0 0 var(--ink); }
+}
+@keyframes toast-glyph { from { opacity: 0; transform: scale(0.4) rotate(-20deg); } to { opacity: 1; transform: none; } }
+@keyframes toast-ring  { 0% { opacity: 0.8; transform: scale(0.9); } 100% { opacity: 0; transform: scale(1.35); } }
+@keyframes toast-shake { 0%, 100% { translate: 0 0; } 25% { translate: -4px 0; } 50% { translate: 3px 0; } 75% { translate: -2px 0; } }
+@keyframes toast-wiggle { 0%, 100% { rotate: 0deg; } 30% { rotate: -10deg; } 60% { rotate: 8deg; } }
+@keyframes toast-timer { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@keyframes toast-indeterminate { from { left: -40%; } to { left: 100%; } }
+@keyframes toast-stripes { to { background-position: 34px 0; } }
+
+@media (max-width: 860px) {
+  .toasts { top: max(12px, env(safe-area-inset-top)); left: 12px; right: 12px; width: auto; }
+  .toast { transform-origin: top center; }
+  @keyframes toast-enter {
+    from { opacity: 0; transform: translateY(-18px) scale(0.96); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes toast-leave { to { opacity: 0; transform: translateY(-14px) scale(0.97); } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast, .toast.leaving, .toast.error, .toast-icon svg, .toast.warning .toast-icon svg { animation-duration: 1ms; animation-iteration-count: 1; }
+  .toast.success .toast-icon::after, .toast-loading::before, .toast-progress span { animation: none; }
+  .toast.is-timed .toast-timer { animation: none; transform: scaleX(0); }
+  .toast:hover { transform: none; }
+}

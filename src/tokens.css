@@ -1,0 +1,190 @@
+/* =========================================================================
+    Electric Lime design tokens. Light theme only.
+    Lime is a FILL. Lime-family text/icons use --accent-ink.
+    Text on a lime fill is always --on-accent (ink).
+    Source: Electric Lime Visual Style Reference, Appendix A (verbatim),
+    followed by the EvoFox app additions at the bottom.
+    ========================================================================= */
+:root {
+  /* brand constants (same in both themes) */
+  --lime: #d6ff36;
+  --ink: #080808;
+  --on-accent: #080808;              /* text/icons ON a lime fill, always */
+
+  /* pastel support palette (charts, tags, categories, illustration, mesh blobs) */
+  --pastel-lavender: #c9b8ff;
+  --pastel-sky: #8ed8f8;
+  --pastel-butter: #ffd166;
+  --pastel-blush: #ffa8a8;
+  --pastel-slate: #b9c2cf;
+
+  /* surfaces, text, states */
+  --bg: #f7f8f4;
+  --panel: #ffffff;
+  --panel-2: #f1f3ec;
+  --hover: var(--lime-tint-1);
+  --line: #e1e4e8;
+  --line-soft: #eceef0;
+  --line-strong: #7e8693;
+  --text: #080808;
+  --muted: #58616f;
+  --accent: #d6ff36;
+  --accent-ink: #080808;             /* text/icons that belong to the lime family: Ink Black */
+  --accent-soft: color-mix(in srgb, #d6ff36 30%, #f7f8f4);   /* selected / "on" background (lime tint) */
+  --link: #080808;
+  --focus: #080808;
+  --edge: #080808;                   /* outline for brutal cards/buttons */
+  --well-dark: #0e0f12;              /* optional dark well for media/colour previews */
+  --success: #d6ff36;                /* success = brand lime FILL; text uses --success-ink */
+  --warning: #b45309;
+  --danger: #d92d20;
+  --danger-hover: #b42318;
+  --info: #58616f;                   /* info = slate (neutral) */
+  --overlay: rgba(5, 5, 6, 0.62);
+  --tooltip-bg: #080808;
+  --tooltip-text: #f4f5ef;
+
+  --shadow-card: 0 1px 2px rgba(8, 8, 8, 0.05), 0 8px 20px -12px rgba(8, 8, 8, 0.2);
+  --shadow-pop: 0 20px 50px -18px rgba(8, 8, 8, 0.28), 0 2px 8px rgba(8, 8, 8, 0.06);
+  --shadow-glow: 0 8px 22px -12px rgba(8, 8, 8, 0.35);
+  --shadow-brut: 3px 3px 0 0 var(--edge);
+  --shadow-brut-hover: 4px 4px 0 0 var(--edge);
+  --shadow-brut-pressed: 1px 1px 0 0 var(--edge);
+
+  /* type */
+  /* Geist everywhere (one family, one voice); Geist Mono for numbers, codes, hex */
+  --font-ui: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Consolas, monospace;
+  --fs-2xs: 11px; --fs-xs: 12px; --fs-sm: 13px; --fs-ctl: 13.5px; --fs-ctl-lg: 14px;
+  --fs-body: 14px; --fs-lg: 16px; --fs-h3: 16px; --fs-h2: 20px; --fs-h1: 24px; --fs-hero: 32px;
+  --lh-tight: 1.2; --lh-body: 1.55;
+  --tracking-tight: -0.015em; --tracking-caps: 0.06em;
+
+  /* space, radius */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px;
+  --r-xs: 6px; --r-sm: 8px; --r-btn: 10px; --r-md: 12px; --r-card: 14px; --r-lg: 18px; --r-xl: 24px; --r-pill: 999px;
+
+  /* motion */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t-instant: 80ms; --t-fast: 120ms; --t-med: 200ms; --t-slow: 320ms; --t-page: 450ms;
+
+  /* layers */
+  --z-sticky: 5; --z-popover: 60; --z-page: 70; --z-veil: 75; --z-modal: 85; --z-toast: 90; --z-splash: 100;
+
+  color-scheme: light;
+}
+
+/* =========================================================================
+   EvoFox app additions (values the guide hard-codes inside its components,
+   moved here so no colour lives outside this file).
+   ========================================================================= */
+:root {
+  /* on-colour helpers */
+  --on-danger: #ffffff;                       /* "white on danger fill", 4.83:1 */
+  --inverse-bg: var(--text);                  /* ink pill: segmented "on", Fn keycap, step numbers */
+  --inverse-text: var(--bg);
+
+  /* dark well (keyboard preview stage) — from the guide's dark toolbar */
+  --well-surface: #16181d;                    /* rgba(22,24,29,.96) solid */
+  --well-hover: #262a33;
+  --well-line: #343944;
+  --well-text: #f4f5ef;
+  --well-muted: #a3a69c;                      /* keycap legends: 7.2:1 on --well-surface */
+  --well-shadow: rgba(0, 0, 0, 0.55);
+
+  /* small shadows the guide inlines */
+  --shadow-knob: 0 1px 2px rgba(8, 8, 8, 0.3);
+  --shadow-tooltip: 0 6px 18px rgba(0, 0, 0, 0.35);
+
+  /* veils */
+  --overlay-blur: 4px;
+  --veil-drop: color-mix(in srgb, var(--lime) 6%, transparent);   /* file-drop veil: lime 6% + 2px blur */
+
+  /* icons */
+  --icon-size: 18px;
+
+  /* Status sets. Success uses the brand (lime fill + ink text); info is neutral
+     (slate on warm white); warning and danger keep distinct hues. Each set:
+     fill (dots, bars, icons), soft background, border, readable ink (AA). */
+  --success-soft: var(--lime-tint-2);  --success-border: var(--lime);           --success-ink: var(--ink);
+  --warning-soft: #fffaeb;             --warning-border: #fedf89;               --warning-ink: #93370d;
+  --danger-soft:  #fef3f2;             --danger-border:  #fecdca;               --danger-ink:  #b42318;
+  --info-soft:    var(--panel-2);      --info-border:    var(--line);           --info-ink:    var(--ink);
+  --neutral-soft: var(--panel-2);      --neutral-border: var(--line);           --neutral-ink: var(--muted);
+
+  /* elevation */
+  --shadow-xs: 0 1px 2px rgba(8, 8, 8, 0.05);
+  --shadow-sm: 0 1px 2px rgba(8, 8, 8, 0.05), 0 2px 6px -2px rgba(8, 8, 8, 0.08);
+  --shadow-md: 0 2px 4px -1px rgba(8, 8, 8, 0.06), 0 10px 24px -8px rgba(8, 8, 8, 0.16);
+  --shadow-lg: 0 4px 8px -2px rgba(8, 8, 8, 0.06), 0 24px 48px -16px rgba(8, 8, 8, 0.24);
+  --shadow-toast: 0 18px 36px -18px rgba(8, 8, 8, 0.45);
+  --shadow-toast-hover: 0 22px 40px -18px rgba(8, 8, 8, 0.5);
+
+  /* Lime tints: the only lime variations, all mixed from --lime (#D6FF36)
+     into Warm White. tint-1 subtle surface, tint-2 selected/soft fill,
+     tint-3 lines and hover edges. Text on any of them is --ink. */
+  --lime-tint-1: color-mix(in srgb, var(--lime) 12%, var(--bg));
+  --lime-tint-2: color-mix(in srgb, var(--lime) 30%, var(--bg));
+  --lime-tint-3: color-mix(in srgb, var(--lime) 60%, var(--bg));
+
+  /* shell */
+  --sidebar-w: 264px;
+  --field-h: 44px;            /* every dropdown, text field and inline action */
+  --header-h: 64px;
+}
+
+/* =========================================================================
+   Hardware colour data — USER CONTENT, not theme.
+   The keyboard's real RGB output (diffusers, cable pulse). Stays as-is.
+   ========================================================================= */
+:root {
+  --rgb-diffuser: linear-gradient(180deg, #38BDF8 0%, #8B5CF6 50%, #EC4899 100%);
+  --rgb-diffuser-left-glow:  rgba(56, 189, 248, .6);
+  --rgb-diffuser-right-glow: rgba(236, 72, 153, .6);
+  --rgb-cable-pulse: linear-gradient(180deg, transparent 0%, #38BDF8 50%, #FFFFFF 100%);
+  --rgb-cable-pulse-glow: #38BDF8;
+}
+
+/* Selection ring for items on colourful content (guide ch. 03 double ring).
+   Resolved at :root so it stays white + ink even inside the dark well. */
+:root {
+  --ring-gap: var(--panel);
+  --ring-edge: var(--ink);
+}
+
+/* =========================================================================
+   Ronin hero illustration (welcome screen). Matches the real keyboard:
+   black case, black + grey keycaps, black EVOFOX plate, silver knob.
+   Keycap glow colours are hardware RGB data (set per key in app.js).
+   ========================================================================= */
+:root {
+  --case-top: #141518;
+  --case-bottom: #08090a;
+  --case-edge: #2a2c31;
+  --case-highlight: rgba(255, 255, 255, 0.08);
+  --plate: #050506;
+  --cap-face: #1a1b1e;               /* black caps: Esc, F-row, mods, arrows */
+  --cap-skirt: #0b0c0d;
+  --cap-grey-face: #4a4d52;          /* grey caps: number row + letters */
+  --cap-grey-skirt: #34363a;
+  --cap-legend: #6f7377;             /* legend with backlight off */
+  --cap-legend-lit: #f4f5ef;
+  --logo-plate: #0c0d0f;
+  --logo-ink: #e9eae6;
+  --knob-face: #1d1f24;
+  --knob-ridge: #34373f;
+  --knob-metal-hi: #e3e5e8;
+  --knob-metal: #a9adb3;
+  --knob-metal-lo: #5f636a;
+  --led-on: #4aa8ff;
+  --port-hole: #050506;
+  --plug-boot: #1c1e23;
+  --plug-metal: #b9bec7;
+  --plug-metal-dark: #7e8693;
+  --wire: #23262c;
+  --floor-shadow: rgba(8, 8, 8, 0.24);
+}

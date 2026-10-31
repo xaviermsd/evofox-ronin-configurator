@@ -1,0 +1,17 @@
+node_modules/
+node_modules/**
+.wrangler/
+.wrangler/**
+.git/
+.git/**
+server.js
+package.json
+package-lock.json
+README.md
+LICENSE
+.gitignore
+.assetsignore
+wrangler.json
+wrangler.jsonc
+assets/readme/
+assets/readme/**

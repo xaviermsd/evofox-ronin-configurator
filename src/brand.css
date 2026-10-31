@@ -1,0 +1,530 @@
+/* ==========================================================================
+   brand.css: the Electric Lime brand layer. One language everywhere,
+   shared with the toasts and the signature button:
+     - lime fills and lime shades (tokens --lime-tint-1 … --ink)
+     - ink borders (1.5–2px) and the ink offset shadow (--shadow-brut)
+     - ink icon tiles with lime glyphs
+     - lift on hover, press on click
+   Loaded last so it can refine every component consistently.
+   ========================================================================== */
+
+/* ============================================================ page canvas */
+.main-wrapper {
+  background:
+    radial-gradient(55% 38% at 100% 0%, color-mix(in srgb, var(--lime-tint-3) 30%, transparent), transparent 70%),
+    radial-gradient(40% 30% at 0% 100%, color-mix(in srgb, var(--lime-tint-2) 40%, transparent), transparent 70%),
+    var(--bg);
+}
+
+/* ================================================================ sidebar */
+.sidebar {
+  background:
+    linear-gradient(180deg, var(--lime-tint-1) 0, var(--panel) 220px),
+    var(--panel);
+  border-right: 1px solid var(--line);
+  gap: var(--sp-4);
+}
+
+.sidebar-brand {
+  padding: var(--sp-2);
+  margin: 0 calc(var(--sp-1) * -1);
+  border-radius: var(--r-card);
+}
+.brand-mark {
+  border-radius: 12px;
+  border: 1.5px solid var(--ink);
+  box-shadow: 2px 2px 0 0 var(--ink);
+  transition: transform var(--t-med) var(--spring), box-shadow var(--t-med) var(--ease-out);
+}
+.sidebar-brand:hover .brand-mark { transform: translate(-1px, -1px) rotate(-4deg); box-shadow: 3px 3px 0 0 var(--ink); }
+.brand-name { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+.brand-sub {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 3px;
+  height: 18px;
+  padding: 0 7px;
+  align-items: center;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+  color: var(--lime);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+/* device card */
+.device-card {
+  border: 1.5px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow-xs);
+}
+.device-card:hover { border-color: var(--ink); box-shadow: 3px 3px 0 0 var(--ink); transform: translate(-1px, -1px); }
+.device-card:active { transform: translate(1px, 1px); box-shadow: var(--shadow-brut-pressed); }
+.device-card[data-state="on"] {
+  border-color: var(--ink);
+  background: linear-gradient(135deg, var(--lime-tint-2), var(--lime-tint-1) 60%, var(--panel));
+  box-shadow: 3px 3px 0 0 var(--ink);
+}
+.device-card[data-state="on"] .device-card-status { color: var(--ink); font-weight: 600; }
+.device-card[data-state="on"] .meter-track { background: var(--panel); box-shadow: inset 0 0 0 1px var(--ink); height: 8px; }
+.device-card[data-state="on"] .meter-fill { background: var(--ink); }
+.device-card[data-state="on"] .meter-fill[data-level="mid"] { background: var(--warning); }
+.device-card[data-state="on"] .meter-fill[data-level="low"] { background: var(--danger); }
+.device-card[data-state="on"] .meter-text { color: var(--ink); }
+.device-card-icon { background: var(--ink); color: var(--panel); border-radius: 11px; }
+.device-card[data-state="on"] .device-card-icon { color: var(--lime); }
+
+/* nav groups */
+.nav-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  opacity: 0.8;
+}
+.nav-section::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--lime);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+.sidebar-nav { gap: 4px; }
+.nav-item {
+  height: 44px;
+  padding: 0 var(--sp-2) 0 6px;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  color: var(--text);
+  font-weight: 500;
+  transition:
+    background var(--t-med) var(--ease-out),
+    border-color var(--t-med) var(--ease-out),
+    box-shadow var(--t-med) var(--ease-out),
+    transform var(--t-fast) var(--ease-out),
+    color var(--t-fast) var(--ease-out);
+}
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--panel-2);
+  color: var(--muted);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.nav-item:hover {
+  background: var(--lime-tint-1);
+  border-color: var(--lime-tint-3);
+}
+.nav-item:hover .nav-icon {
+  background: var(--lime-tint-2);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--lime);
+  transform: translateX(2px) rotate(-3deg);
+}
+.nav-item:active { transform: scale(0.98); }
+.nav-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.nav-item.active {
+  background: var(--lime);
+  border-color: var(--ink);
+  color: var(--ink);
+  font-weight: 650;
+  box-shadow: 3px 3px 0 0 var(--ink);
+  transform: translate(-1px, -1px);
+}
+.nav-item.active:hover { box-shadow: 4px 4px 0 0 var(--ink); transform: translate(-2px, -2px); }
+.nav-item.active:active { box-shadow: 1px 1px 0 0 var(--ink); transform: translate(1px, 1px); }
+.nav-item.active .nav-icon {
+  background: var(--ink);
+  color: var(--lime);
+  box-shadow: none;
+  transform: none;
+  animation: nav-icon-pop 420ms var(--spring) both;
+}
+.nav-item.active::before { display: none; }
+.nav-item.active::after {                /* small "you are here" pip */
+  content: '';
+  margin-left: auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ink) 15%, transparent);
+}
+@keyframes nav-icon-pop { 0% { transform: scale(0.7) rotate(-12deg); } 100% { transform: none; } }
+
+.sidebar-nav.device-disconnected .nav-item.locked-tab:hover { background: var(--panel-2); border-color: var(--line); }
+.sidebar-nav.device-disconnected .nav-item.locked-tab:hover .nav-icon { background: var(--panel-2); color: var(--muted); box-shadow: inset 0 0 0 1px var(--line); transform: none; }
+.nav-lock { background: var(--panel); box-shadow: inset 0 0 0 1px var(--line); }
+
+/* privacy panel */
+.privacy-note {
+  border: 1.5px solid var(--ink);
+  background: linear-gradient(135deg, var(--lime-tint-2), var(--lime-tint-1));
+  box-shadow: 2px 2px 0 0 var(--ink);
+  color: var(--ink);
+}
+.privacy-note strong { color: var(--ink); }
+.privacy-icon { background: var(--ink); color: var(--lime); }
+
+/* ================================================================= header */
+.top-header {
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  border-bottom: 1px solid var(--line);
+  padding-block: var(--sp-3);
+  min-height: 72px;
+}
+.top-header::after {                     /* lime rule along the bottom edge */
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--lime) 0%, var(--lime-tint-3) 35%, transparent 80%);
+}
+.header-eyebrow {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+  padding: 0 8px;
+  margin-bottom: 4px;
+  border-radius: var(--r-pill);
+  background: var(--lime-tint-2);
+  border: 1px solid var(--lime);
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+}
+.header-eyebrow::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--ink); }
+.header-title-area h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+.header-title-area p { margin-top: 2px; }
+
+/* device status capsule */
+.device-cluster {
+  height: 40px;
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: 2px 2px 0 0 var(--ink);
+}
+.device-cluster > * + *:not([style*="display: none"]) { border-left: 1px solid var(--line); }
+.device-pill { padding: 0 var(--sp-3); font-weight: 600; }
+.device-pill.connected { background: var(--lime-tint-1); color: var(--ink); }
+.device-pill.connected .device-dot { background: var(--success); box-shadow: 0 0 0 3px var(--success-soft); animation: status-breathe 2.4s var(--ease) infinite; }
+@keyframes status-breathe { 50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--success) 18%, transparent); } }
+.device-pill.warning { background: var(--warning-soft); }
+.device-pill.error { background: var(--danger-soft); }
+button.device-pill:hover { background: var(--lime-tint-2); }
+.battery-indicator { font-weight: 600; }
+.battery-shell { border-color: var(--ink); }
+.battery-shell::after { background: var(--ink); }
+.fw-pill { gap: 6px; }
+.fw-pill svg { color: var(--muted); }
+.fw-pill .fw-label { color: var(--muted); }
+
+/* header buttons: branded */
+.header-telemetry-bar .btn-action-secondary,
+.header-telemetry-bar .btn-connect-primary {
+  height: 40px;
+  border-radius: 12px;
+  border: 1.5px solid var(--ink);
+  font-weight: 600;
+  box-shadow: 2px 2px 0 0 var(--ink);
+  transition: transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out), background var(--t-fast) var(--ease-out);
+}
+.header-telemetry-bar .btn-action-secondary { background: var(--panel); color: var(--ink); }
+.header-telemetry-bar .btn-action-secondary:hover:not(:disabled) { background: var(--lime-tint-1); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 0 var(--ink); }
+.header-telemetry-bar :is(.btn-action-secondary, .btn-connect-primary):active:not(:disabled) { transform: translate(1px, 1px); box-shadow: 0 0 0 0 var(--ink); }
+.header-telemetry-bar .btn-connect-primary:not(.connected-state) { background: var(--lime); color: var(--on-accent); }
+.header-telemetry-bar .btn-connect-primary:not(.connected-state):hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 0 var(--ink); }
+.header-telemetry-bar .btn-connect-primary.connected-state {
+  background: var(--panel);
+  color: var(--danger-ink);
+  border-color: var(--danger-ink);
+  box-shadow: 2px 2px 0 0 var(--danger-ink);
+}
+.header-telemetry-bar .btn-connect-primary.connected-state:hover:not(:disabled) {
+  background: var(--danger-soft);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 0 var(--danger-ink);
+}
+.header-telemetry-bar :is(.btn-action-secondary, .btn-connect-primary) svg { transition: transform var(--t-med) var(--spring); }
+.header-telemetry-bar :is(.btn-action-secondary, .btn-connect-primary):hover svg { transform: scale(1.12) rotate(-6deg); }
+.save-state { border: 1px solid transparent; }
+.save-state.is-saving { background: var(--lime-tint-1); border-color: var(--lime-tint-3); color: var(--ink); }
+
+/* ================================================================ buttons */
+.btn-action-primary, .btn-primary, .btn-connect-hero {
+  border: 2px solid var(--ink) !important;
+  box-shadow: var(--shadow-brut);
+  transition: transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out), background var(--t-fast) var(--ease-out);
+}
+:is(.btn-action-primary, .btn-primary, .btn-connect-hero):hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: var(--shadow-brut-hover); background: var(--lime); }
+:is(.btn-action-primary, .btn-primary, .btn-connect-hero):active:not(:disabled) { transform: translate(2px, 2px); box-shadow: var(--shadow-brut-pressed); }
+.btn-action-secondary, .btn-secondary {
+  transition: background var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
+}
+:is(.btn-action-secondary, .btn-secondary):hover:not(:disabled) { background: var(--lime-tint-1); border-color: var(--ink); box-shadow: 2px 2px 0 0 var(--ink); transform: translate(-1px, -1px); }
+:is(.btn-action-secondary, .btn-secondary):active:not(:disabled) { transform: translate(1px, 1px); box-shadow: none; }
+
+/* ========================================================= cards & sections */
+.surface-card {
+  border: 1px solid var(--line);
+  box-shadow: inset 0 3px 0 0 var(--lime), var(--shadow-sm);
+}
+.card-header-row h3::before {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--lime);
+  box-shadow: 0 0 0 1.5px var(--ink);
+}
+.card-header-row h3 { gap: 10px; }
+.card-subtitle { color: var(--muted); font-weight: 500; }
+
+/* clickable cards lift with the signature shadow */
+:is(.quick-nav-card, .instruction-card, .feature-showcase-card, .quick-ref-card,
+    .guide-shortcut-card, .faq-card, .guide-step-card, .guide-onboarding-step) {
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  transition: transform var(--t-med) var(--ease-out), box-shadow var(--t-med) var(--ease-out), border-color var(--t-med) var(--ease-out), background var(--t-med) var(--ease-out);
+}
+:is(.quick-nav-card, .instruction-card, .feature-showcase-card, .quick-ref-card,
+    .guide-shortcut-card, .faq-card, .guide-step-card, .guide-onboarding-step):hover {
+  border-color: var(--ink);
+  background: linear-gradient(160deg, var(--lime-tint-1), var(--panel) 55%);
+  box-shadow: 4px 4px 0 0 var(--ink);
+  transform: translate(-2px, -2px);
+}
+.quick-nav-card:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 0 var(--ink); }
+
+/* icon tiles: ink with lime glyph */
+:is(.instruction-icon, .qref-icon, .guidance-banner .guidance-icon, .section-icon, .mode-icon) {
+  background: var(--ink) !important;
+  color: var(--lime) !important;
+  border-radius: 12px;
+}
+.section-icon { width: 40px; height: 40px; display: inline-grid; place-items: center; font-size: 0; }
+.section-icon svg { width: 20px; height: 20px; }
+.quick-nav-header h4 { display: flex; align-items: center; gap: 10px; }
+.quick-nav-header h4 svg {
+  width: 32px;
+  height: 32px;
+  padding: 7px;
+  border-radius: 10px;
+  background: var(--ink);
+  color: var(--lime);
+  box-sizing: border-box;
+}
+.quick-nav-status {
+  border-radius: var(--r-pill);
+  background: var(--lime-tint-2);
+  border: 1px solid var(--lime);
+  color: var(--ink);
+  font-weight: 600;
+}
+.quick-nav-btn { color: var(--ink); font-weight: 600; }
+.quick-nav-card:hover .quick-nav-btn { color: var(--ink); }
+
+/* dashboard stats */
+.device-telemetry-banner { border: 1px solid var(--line); box-shadow: inset 0 3px 0 0 var(--lime), var(--shadow-sm); }
+.telemetry-item { background: var(--lime-tint-1); border: 1px solid var(--lime-tint-3); }
+.telemetry-item:first-child { background: linear-gradient(135deg, var(--lime-tint-2), var(--lime-tint-1)); border-color: var(--lime); }
+.telemetry-label { color: var(--muted); }
+
+.mode-box { border: 1px solid var(--line); }
+.mode-box.verified-box { background: linear-gradient(160deg, var(--lime-tint-1), var(--panel) 70%); border-color: var(--lime); box-shadow: inset 4px 0 0 0 var(--lime); }
+.mode-verified-badge { background: var(--ink) !important; color: var(--lime) !important; border-color: var(--ink) !important; }
+.mode-box-label { color: var(--muted); }
+
+/* selection states */
+.slot-pill.active { background: var(--lime); border-color: var(--ink); box-shadow: 2px 2px 0 0 var(--ink); }
+.slot-pill.active > span { color: var(--ink); }
+#tab-backlight .mode-tile.active {
+  background: linear-gradient(135deg, var(--lime-tint-3), var(--lime));
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 0 var(--ink);
+  transform: translate(-1px, -1px);
+}
+#tab-backlight .mode-tile:hover:not(.active) { border-color: var(--ink); background: var(--lime-tint-1); }
+.effect-filter.is-on { background: var(--lime); color: var(--ink); box-shadow: 0 0 0 1.5px var(--ink); }
+.effect-filter:hover:not(.is-on) { background: var(--lime-tint-1); }
+.preset-chip:hover { border-color: var(--ink); background: var(--lime-tint-1); box-shadow: 2px 2px 0 0 var(--ink); }
+.live-sync-toggle:has(input:checked) { background: linear-gradient(135deg, var(--lime-tint-2), var(--lime-tint-1)); border-color: var(--ink); box-shadow: 2px 2px 0 0 var(--ink); }
+.level-value { background: var(--lime-tint-2); color: var(--ink); border: 1px solid var(--lime); }
+.rgb-now-icon { border: 1.5px solid var(--ink); box-shadow: 2px 2px 0 0 color-mix(in srgb, var(--ink) 35%, transparent); }
+.remap-inspector-box { background: linear-gradient(160deg, var(--lime-tint-1), var(--panel-2) 70%); border-color: var(--lime-tint-3); }
+.step-chip { border-color: var(--lime-tint-3); background: var(--lime-tint-1); }
+
+/* =============================================================== notices */
+/* info, tips and help adopt the lime brand; warnings and errors keep their
+   meaning colours inside the same frame (ink icon tile, left bar). */
+:is(.connect-guidance-pill, .reactive-guide-bar, .mode-explainer-drawer, .connect-mode-hint) {
+  --tone: var(--ink);
+  --tone-soft: var(--lime-tint-1);
+  --tone-border: var(--lime-tint-3);
+  --tone-ink: var(--ink);
+}
+:is(.connect-guidance-pill, .connect-mode-hint, .rf-offline-alert, .error-card,
+    .env-compatibility-banner, .reactive-guide-bar, .mode-explainer-drawer) {
+  border-width: 1px;
+  box-shadow: inset 4px 0 0 0 var(--tone-bar, var(--lime)), var(--shadow-xs);
+  padding-left: calc(var(--sp-4) + 4px);
+}
+.rf-offline-alert, .env-compatibility-banner.mobile-env, .env-compatibility-banner.unsupported-browser { --tone-bar: var(--warning); }
+.error-card { --tone-bar: var(--danger); }
+.connect-mode-hint { border-style: dashed; border-color: var(--lime); background: var(--lime-tint-1); }
+
+:is(.connect-guidance-pill .guidance-icon, .connect-mode-hint .hint-icon, .rf-offline-icon, .env-banner-icon) {
+  background: var(--ink) !important;
+  box-shadow: none !important;
+  color: var(--lime) !important;
+}
+.rf-offline-icon, .env-compatibility-banner.mobile-env .env-banner-icon, .env-compatibility-banner.unsupported-browser .env-banner-icon { color: var(--pastel-butter) !important; }
+.reactive-pulse-dot { background: var(--ink); animation-name: pulse-ring-ink; }
+@keyframes pulse-ring-ink { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ink) 35%, transparent); } 80%, 100% { box-shadow: 0 0 0 8px transparent; } }
+
+/* locked tabs */
+.connection-required-card {
+  border: 1.5px dashed var(--ink);
+  background:
+    radial-gradient(120% 160% at 0% 0%, var(--lime-tint-2), transparent 55%),
+    var(--panel);
+  box-shadow: 3px 3px 0 0 color-mix(in srgb, var(--ink) 18%, transparent);
+}
+.connection-required-card .req-icon { background: var(--lime-tint-1); box-shadow: inset 0 0 0 1.5px var(--lime); }
+
+/* troubleshooting */
+.connect-troubleshoot-drawer { border: 1.5px solid var(--line); }
+.troubleshoot-toggle-label > span { background: var(--ink); color: var(--lime); }
+.btn-troubleshoot-toggle:hover { background: var(--lime-tint-1); }
+.troubleshoot-item { background: var(--lime-tint-1); border: 1px solid var(--lime-tint-3); }
+.instruction-step-num { background: var(--ink); color: var(--lime); border-color: var(--ink); }
+
+/* ============================================================ help guide */
+.guide-page-header { border: 1.5px solid var(--ink); box-shadow: 4px 4px 0 0 var(--ink); }
+.guide-page-badge { background: var(--ink) !important; color: var(--lime) !important; border-color: var(--ink) !important; }
+.guide-section-header, .guide-group-header, .guide-faq-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.guide-group-header, .guide-section-header { padding-bottom: var(--sp-2); border-bottom: 2px solid var(--lime); }
+.guide-group-header svg, .guide-section-header svg {
+  width: 30px; height: 30px; padding: 7px; box-sizing: border-box; border-radius: 9px;
+  background: var(--ink); color: var(--lime);
+}
+.guide-cat-btn {
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--line);
+  transition: background var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
+}
+.guide-cat-btn:hover { background: var(--lime-tint-1); border-color: var(--ink); }
+.guide-cat-btn.active, .guide-cat-btn.is-on, .guide-cat-btn[aria-pressed="true"] {
+  background: var(--lime);
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 2px 2px 0 0 var(--ink);
+}
+.fn-cap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: var(--ink) !important;
+  color: var(--lime) !important;
+  border: 0 !important;
+  box-shadow: inset 0 -3px 0 0 color-mix(in srgb, var(--lime) 25%, var(--ink)) !important;
+  font: 700 var(--fs-xs)/1 var(--font-mono);
+}
+.fn-cap.fn-cap-secondary { background: var(--panel) !important; color: var(--ink) !important; box-shadow: inset 0 0 0 1.5px var(--ink), inset 0 -3px 0 0 var(--line) !important; }
+.fn-plus { color: var(--muted); font-weight: 700; }
+.guide-action-pill { background: var(--lime-tint-2) !important; color: var(--ink) !important; border: 1px solid var(--lime) !important; }
+.guide-feedback-row { background: var(--lime-tint-1); border: 1px solid var(--lime-tint-3); border-radius: var(--r-sm); }
+.guide-note-box { background: var(--lime-tint-1); border-left: 4px solid var(--lime); }
+.guide-search-input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px var(--lime-tint-3); }
+.faq-card h4::before { content: 'Q'; display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 8px; border-radius: 6px; background: var(--lime); color: var(--ink); font: 700 12px/1 var(--font-mono); box-shadow: 0 0 0 1.5px var(--ink); vertical-align: middle; }
+
+/* ================================================================ forms */
+:is(select, input[type="text"], input[type="search"]):focus { border-color: var(--ink); box-shadow: 0 0 0 3px var(--lime-tint-3); outline: none; }
+.switch:checked { box-shadow: 0 0 0 3px var(--lime-tint-3); }
+
+/* =============================================================== dialogs */
+.modal-surface { border: 2px solid var(--ink); box-shadow: 6px 6px 0 0 var(--ink), var(--shadow-lg); }
+.modal-header { border-bottom: 2px solid var(--lime); padding-bottom: var(--sp-3); }
+.remap-key-btn:hover { background: var(--lime); border-color: var(--ink); color: var(--ink); }
+.remap-group-title { color: var(--muted); }
+
+/* ================================================================ footer */
+.app-footer { border-top: 2px solid var(--lime-tint-3); }
+
+/* ============================================================ responsive */
+@media (max-width: 860px) {
+  .sidebar { background: color-mix(in srgb, var(--panel) 94%, transparent); }
+  .nav-item { height: 38px; border-color: var(--line); }
+  .nav-item.active { transform: none; box-shadow: 2px 2px 0 0 var(--ink); }
+  .nav-item.active::after { display: none; }
+  .nav-icon { width: 26px; height: 26px; }
+  .top-header::after { display: none; }
+  .device-cluster { box-shadow: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-item.active .nav-icon, .device-pill.connected .device-dot { animation: none; }
+  :is(.quick-nav-card, .instruction-card, .feature-showcase-card, .quick-ref-card, .guide-shortcut-card, .faq-card):hover { transform: none; }
+}
+
+/* Header Connect while the welcome screen shows its own big Connect button:
+   stays secondary (one primary per view) but in the branded secondary style. */
+.app-shell:has(#tab-dashboard.active #dashDisconnectedView:not([style*="none"])) .header-telemetry-bar .btn-connect-primary:not(.connected-state) {
+  background: var(--panel);
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  box-shadow: 2px 2px 0 0 var(--ink);
+}
+.app-shell:has(#tab-dashboard.active #dashDisconnectedView:not([style*="none"])) .header-telemetry-bar .btn-connect-primary:not(.connected-state):hover {
+  background: var(--lime-tint-1);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 0 var(--ink);
+}
+
+/* section cards that already lead with an icon tile don't need the title marker */
+.card-title-group:has(.section-icon) h3::before { display: none; }
+
+@media (max-width: 860px) {
+  .nav-section { display: none; }
+  .btn-guide .btn-guide-label { display: inline; }
+}
+
+
+/* ======================================================= status dots
+   Success = brand lime; on light surfaces every lime dot gets an ink ring. */
+:is(.status-dot.is-success, .device-pill.connected .device-dot, .device-card[data-state="on"] .device-card-dot,
+    .connect-status-pill.connected .status-indicator-dot, .slot-pill.is-supported::after, .slot-pill.active-hardware::after) {
+  background: var(--lime) !important;
+  box-shadow: 0 0 0 1.5px var(--ink) !important;
+}
+.device-pill.connected .device-dot { animation: none; }
+.device-card[data-state="on"] .device-card-dot::after { color: var(--ink); }
+.slot-pill.active-hardware { border-color: var(--ink); }
+.battery-fill { background: var(--ink); }
+
+/* one left accent only (legacy border-left removed visually) */
+.mode-box.verified-box { border-left-width: 1px; }
+/* charging is good news, not a warning */
+.charge-icon, .telemetry-sub { color: var(--ink) !important; }
+.telemetry-sub svg { color: var(--ink); }

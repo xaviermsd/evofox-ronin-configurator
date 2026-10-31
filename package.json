@@ -1,0 +1,28 @@
+{
+  "name": "evofox-ronin-configurator",
+  "version": "1.0.0",
+  "description": "Native WebHID Driver & RGB Studio for EvoFox Ronin 75% Wireless Mechanical Keyboard",
+  "main": "server.js",
+  "homepage": "https://github.com/xaviermsd/evofox-ronin-configurator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xaviermsd/evofox-ronin-configurator.git"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "evofox",
+    "ronin",
+    "webhid",
+    "keyboard",
+    "keyboard-configurator",
+    "rgb-controller"
+  ],
+  "author": {
+    "name": "Harsh Prajapati",
+    "url": "https://www.instagram.com/harshprajapatiofficial/"
+  },
+  "license": "MIT"
+}

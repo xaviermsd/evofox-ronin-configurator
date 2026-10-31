@@ -1,0 +1,292 @@
+/* ==========================================================================
+   callouts.css: one look for every notice in the app.
+   Tone (info / success / warning / danger / neutral) sets a soft background,
+   a border, an icon tile and readable ink. Titles 14/600, body 13.5/1.55.
+   Applies to the existing notice classes, so no behaviour changes.
+   ========================================================================== */
+
+:is(.connect-guidance-pill, .connect-mode-hint, .rf-offline-alert, .error-card,
+    .env-compatibility-banner, .reactive-guide-bar, .connection-required-card,
+    .mode-explainer-drawer) {
+  --tone: var(--info);
+  --tone-soft: var(--info-soft);
+  --tone-border: var(--info-border);
+  --tone-ink: var(--info-ink);
+}
+.connect-mode-hint, .mode-explainer-drawer { --tone: var(--muted); --tone-soft: var(--panel); --tone-border: var(--line); --tone-ink: var(--text); }
+.rf-offline-alert, .env-compatibility-banner.mobile-env, .env-compatibility-banner.unsupported-browser {
+  --tone: var(--warning); --tone-soft: var(--warning-soft); --tone-border: var(--warning-border); --tone-ink: var(--warning-ink);
+}
+.error-card { --tone: var(--danger); --tone-soft: var(--danger-soft); --tone-border: var(--danger-border); --tone-ink: var(--danger-ink); }
+.connection-required-card { --tone: var(--ink); --tone-soft: var(--panel); --tone-border: var(--line); --tone-ink: var(--text); }
+
+/* ------------------------------------------------ compact inline notices */
+.connect-guidance-pill,
+.connect-mode-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--tone-border);
+  border-radius: var(--r-md);
+  background: var(--tone-soft);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  text-align: left;
+}
+.connect-mode-hint { border-style: dashed; color: var(--muted); }
+.connect-guidance-pill .guidance-icon,
+.connect-mode-hint .hint-icon {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  flex: none;
+  background: var(--panel);
+  color: var(--tone-ink);
+  box-shadow: inset 0 0 0 1px var(--tone-border);
+}
+.connect-guidance-pill .guidance-icon svg,
+.connect-mode-hint .hint-icon svg { width: 15px; height: 15px; }
+.connect-guidance-pill strong, .connect-mode-hint strong { color: var(--text); }
+
+/* -------------------------------------------- block notices with a title */
+.rf-offline-alert,
+.error-card,
+.env-compatibility-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  border: 1px solid var(--tone-border);
+  border-radius: var(--r-card);
+  background: var(--tone-soft);
+  box-shadow: var(--shadow-xs);
+  animation: pop-in var(--t-slow) var(--ease-out) both;
+}
+.rf-offline-icon,
+.env-banner-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  flex: none;
+  background: var(--panel);
+  color: var(--tone-ink);
+  box-shadow: inset 0 0 0 1px var(--tone-border), var(--shadow-xs);
+}
+.rf-offline-icon svg, .env-banner-icon svg { width: 22px; height: 22px; }
+
+.rf-offline-content h4,
+.error-card h4,
+.env-banner-title {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text);
+  margin: 0 0 4px;
+}
+.rf-offline-content p,
+.error-card p,
+.env-banner-desc {
+  font-size: var(--fs-ctl);
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--tone-ink) 70%, var(--muted));
+  margin: 0;
+}
+.rf-offline-content ul {
+  margin: var(--sp-3) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.rf-offline-content li {
+  position: relative;
+  padding-left: 22px;
+  font-size: var(--fs-ctl);
+  line-height: 1.55;
+  color: var(--text);
+}
+.rf-offline-content li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--tone);
+}
+
+.error-card .spot { width: 56px; height: 56px; flex: none; }
+.error-card button { margin-top: var(--sp-3); }
+
+.env-banner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 8px;
+  margin-bottom: 6px;
+  border-radius: var(--r-pill);
+  background: var(--panel);
+  color: var(--tone-ink);
+  border: 1px solid var(--tone-border);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+.env-banner-note {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: flex-start;
+  margin-top: var(--sp-3);
+  padding: var(--sp-3);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--muted);
+}
+.env-banner-note svg { flex: none; margin-top: 2px; color: var(--accent-ink); }
+.env-banner-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-4); }
+
+/* ------------------------------------------ locked tabs: friendly empty state */
+.connection-required-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  padding: var(--sp-5);
+  margin-bottom: var(--sp-5);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--lime) 14%, transparent), transparent 55%),
+    var(--panel);
+  animation: pop-in var(--t-slow) var(--ease-out) both;
+}
+.connection-required-card.hidden { display: none; }
+.connection-required-card .req-left { display: flex; align-items: center; gap: var(--sp-4); min-width: 0; }
+.connection-required-card .req-icon {
+  width: 72px;
+  height: 72px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: var(--panel-2);
+  color: var(--text);
+}
+.connection-required-card .req-icon svg { width: 56px; height: 56px; }
+.connection-required-card .req-icon > svg.icon { width: 28px; height: 28px; }
+.connection-required-card h4 { font-size: var(--fs-lg); font-weight: 600; margin: 0 0 4px; }
+.connection-required-card p { font-size: var(--fs-ctl); margin: 0; max-width: 520px; }
+
+/* --------------------------------------------- reactive effect helper bar */
+.reactive-guide-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-top: var(--sp-3);
+  padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-3);
+  border: 1px solid var(--tone-border);
+  border-radius: var(--r-md);
+  background: var(--tone-soft);
+  color: var(--tone-ink);
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+}
+.reactive-guide-label { display: flex; align-items: center; gap: var(--sp-2); }
+.reactive-pulse-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex: none;
+  background: var(--info);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--info) 50%, transparent);
+  animation: pulse-ring 1.8s var(--ease-out) infinite;
+}
+@keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--info) 45%, transparent); } 80%, 100% { box-shadow: 0 0 0 8px transparent; } }
+
+/* --------------------------------------------- connection mode explainer */
+.mode-explainer-drawer {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--tone-border);
+  border-radius: var(--r-md);
+  background: var(--tone-soft);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--muted);
+  text-align: left;
+}
+.mode-explainer-drawer strong { color: var(--text); }
+
+/* ------------------------------------------------ "how to connect" cards */
+.instruction-card {
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--panel);
+  padding: var(--sp-5);
+  transition: border-color var(--t-med) var(--ease-out), box-shadow var(--t-med) var(--ease-out), transform var(--t-med) var(--ease-out);
+}
+.instruction-card:hover { border-color: var(--line-strong); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.instruction-card-header { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-4); }
+.instruction-icon {
+  width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; flex: none;
+  background: var(--ink); color: var(--lime);
+}
+.instruction-title { font-size: var(--fs-lg); font-weight: 600; color: var(--text); line-height: 1.3; }
+.instruction-subtitle { font-size: var(--fs-xs); color: var(--muted); line-height: 1.4; }
+.instruction-steps { display: grid; gap: var(--sp-3); }
+.instruction-step { display: flex; gap: var(--sp-3); align-items: flex-start; font-size: var(--fs-ctl); line-height: 1.55; color: var(--muted); }
+.instruction-step-num {
+  width: 22px; height: 22px; border-radius: 50%; flex: none; display: grid; place-items: center;
+  background: var(--panel-2); color: var(--text); border: 1px solid var(--line);
+  font: 600 var(--fs-2xs)/1 var(--font-mono);
+}
+.instruction-card.is-warning { background: linear-gradient(180deg, var(--warning-soft), var(--panel) 60%); border-color: var(--warning-border); }
+.instruction-card.is-warning .instruction-icon { background: var(--panel); color: var(--warning-ink); box-shadow: inset 0 0 0 1px var(--warning-border); }
+.instruction-card.is-warning .instruction-title { color: var(--warning-ink); }
+.instruction-card.is-warning .instruction-step-num { background: var(--warning-soft); border-color: var(--warning-border); color: var(--warning-ink); }
+
+/* --------------------------------------------------- troubleshooting drawer */
+.connect-troubleshoot-drawer {
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--panel);
+  overflow: hidden;
+}
+.btn-troubleshoot-toggle {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+  width: 100%; padding: var(--sp-4) var(--sp-5);
+  border: 0; background: transparent; cursor: pointer; font: inherit; color: var(--text); text-align: left;
+  transition: background var(--t-fast) var(--ease-out);
+}
+.btn-troubleshoot-toggle:hover { background: var(--panel-2); }
+.btn-troubleshoot-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.troubleshoot-toggle-label { display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-body); }
+.troubleshoot-toggle-label > span {
+  width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center;
+  background: var(--info-soft); color: var(--info-ink);
+}
+.troubleshoot-drawer-content { padding: 0 var(--sp-5) var(--sp-5); animation: pop-in var(--t-med) var(--ease-out) both; }
+.troubleshoot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--sp-3); }
+.troubleshoot-item { padding: var(--sp-4); border-radius: var(--r-md); background: var(--panel-2); }
+.troubleshoot-item strong { display: block; font-size: var(--fs-ctl); margin-bottom: 4px; }
+.troubleshoot-item p { font-size: var(--fs-sm); line-height: 1.55; margin: 0; }
+
+@media (max-width: 860px) {
+  .connection-required-card { flex-direction: column; align-items: stretch; text-align: left; }
+  .connection-required-card .req-left { align-items: flex-start; }
+  .rf-offline-alert, .error-card, .env-compatibility-banner { padding: var(--sp-4); gap: var(--sp-3); }
+}

@@ -1,0 +1,208 @@
+/* ==========================================================================
+   feedback.css: the shared loading & feedback visuals (src/feedback.js).
+   One spinner (lime arc on an ink track), one brand mark (ink fox inside a
+   lime ring), used by: first-load splash, full-screen loader, section
+   overlays, busy buttons, the save indicator and loading toasts.
+   ========================================================================== */
+
+/* ------------------------------------------------------- branded spinner */
+.bspin {
+  --s: 16px;
+  display: inline-block;
+  flex: none;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  border: calc(var(--s) / 7 + 1px) solid color-mix(in srgb, var(--ink) 16%, transparent);
+  border-top-color: var(--ink);
+  border-right-color: var(--lime);
+  animation: orbit 0.75s linear infinite;
+}
+/* on dark surfaces (toast icon tile, ink buttons) */
+.bspin.on-ink, .toast-icon .bspin { border-color: color-mix(in srgb, var(--lime) 22%, transparent); border-top-color: var(--lime); border-right-color: var(--lime); }
+/* on lime buttons: ink arc */
+.btn-action-primary .bspin, .btn-connect-hero .bspin, .btn-connect-primary .bspin { border-color: color-mix(in srgb, var(--ink) 20%, transparent); border-top-color: var(--ink); border-right-color: var(--ink); }
+
+/* -------------------------------------------- brand mark: fox + lime ring */
+.brand-loader {
+  --size: 88px;
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  display: grid;
+  place-items: center;
+}
+.brand-loader.is-lg { --size: 96px; }
+.brand-loader::before {                                /* soft lime glow */
+  content: '';
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--lime) 55%, transparent) 0%, transparent 65%);
+  filter: blur(6px);
+  animation: brand-glow 2.4s var(--ease) infinite;
+}
+.brand-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.brand-ring circle { fill: none; stroke-width: 6; }
+.brand-ring-track { stroke: color-mix(in srgb, var(--ink) 10%, transparent); }
+.brand-ring-arc {
+  stroke: var(--lime);
+  stroke-linecap: round;
+  stroke-dasharray: 28 72;
+  filter: drop-shadow(0 0 0.5px var(--ink)) drop-shadow(0 0 0.5px var(--ink));
+  transform-origin: 60px 60px;
+  animation: brand-orbit 1.1s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite, brand-stretch 2.2s var(--ease) infinite;
+}
+.brand-fox {
+  position: relative;
+  width: 46%;
+  aspect-ratio: 1;
+  background: var(--ink);
+  -webkit-mask: url(../assets/brand/fox-mark.svg) center / contain no-repeat;
+          mask: url(../assets/brand/fox-mark.svg) center / contain no-repeat;
+  animation: brand-breathe 2.2s var(--ease) infinite;
+}
+
+@keyframes brand-orbit   { to { transform: rotate(360deg); } }
+@keyframes brand-stretch { 0%, 100% { stroke-dasharray: 18 82; } 50% { stroke-dasharray: 46 54; } }
+@keyframes brand-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.94); } }
+@keyframes brand-glow    { 0%, 100% { opacity: 0.55; transform: scale(0.92); } 50% { opacity: 0.95; transform: scale(1.04); } }
+
+/* ------------------------------------------------------ first-load splash */
+.app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-splash);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-5);
+  background:
+    radial-gradient(45% 35% at 50% 42%, color-mix(in srgb, var(--lime) 22%, transparent), transparent 70%),
+    var(--bg);
+  animation: splash-in 380ms var(--ease-out) both;
+}
+.app-splash .brand-loader { --size: 112px; animation: splash-mark-in 620ms var(--spring) both; }
+.splash-word { display: flex; flex-direction: column; align-items: center; gap: 6px; animation: splash-rise 520ms var(--ease-out) 120ms both; }
+.splash-word strong { font: 700 22px/1.2 var(--font-display); letter-spacing: -0.02em; color: var(--ink); }
+.splash-word span {
+  height: 20px;
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+  color: var(--lime);
+  font: 600 10px/1 var(--font-ui);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+.splash-bar {
+  position: relative;
+  width: 160px;
+  height: 4px;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+  overflow: hidden;
+  animation: splash-rise 520ms var(--ease-out) 200ms both;
+}
+.splash-bar span {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 40%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--ink), var(--lime));
+  animation: splash-sweep 1.1s var(--ease) infinite;
+}
+.app-splash.is-leaving { animation: splash-out 420ms var(--ease-in) both; pointer-events: none; }
+.app-splash.is-leaving .brand-loader { animation: splash-mark-out 420ms var(--ease-in) both; }
+
+/* the app fades up from behind the splash: no flash, no layout shift */
+html.is-booting .app-shell { opacity: 0; }
+.app-shell { transition: opacity 420ms var(--ease-out); }
+
+@keyframes splash-in       { from { opacity: 0; } }
+@keyframes splash-out      { to { opacity: 0; visibility: hidden; } }
+@keyframes splash-mark-in  { from { opacity: 0; transform: scale(0.7) rotate(-12deg); } }
+@keyframes splash-mark-out { to { transform: scale(1.12); opacity: 0; } }
+@keyframes splash-rise     { from { opacity: 0; transform: translateY(8px); } }
+@keyframes splash-sweep    { from { left: -40%; } to { left: 100%; } }
+
+/* --------------------------------------------- full-screen loader (connect) */
+.loading-overlay {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(8px) saturate(1.2);
+}
+.loading-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  width: min(380px, calc(100vw - 32px));
+  padding: var(--sp-6) var(--sp-5) var(--sp-5);
+  border-radius: 22px;
+  border: 2px solid var(--ink);
+  background: var(--panel);
+  box-shadow: 6px 6px 0 0 var(--ink), var(--shadow-lg);
+  text-align: center;
+}
+.loading-overlay.active .loading-card { animation: dialog-in 360ms var(--spring) both; }
+.loading-card .brand-loader { margin-bottom: var(--sp-2); }
+.loading-title { font-size: var(--fs-h3); font-weight: 650; color: var(--ink); }
+.loading-desc { font-size: var(--fs-sm); color: var(--muted); }
+.loading-card .progress-track { height: 6px; border-radius: var(--r-pill); background: color-mix(in srgb, var(--ink) 10%, transparent); overflow: hidden; }
+.loading-card .progress-fill { background: linear-gradient(90deg, var(--ink), var(--lime)); }
+.loading-overlay.is-done .brand-ring-arc { stroke-dasharray: 100 0; animation: none; transition: stroke-dasharray 300ms var(--ease-out); }
+.loading-reassure { font-size: var(--fs-xs); color: var(--muted); }
+
+/* ------------------------------------------- section overlay (card level) */
+.has-section-busy { position: relative; }
+.section-busy {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--panel) 70%, transparent);
+  backdrop-filter: blur(3px);
+  animation: fade-in 200ms var(--ease-out) both;
+}
+.section-busy.is-leaving { animation: section-out 220ms var(--ease-in) both; }
+.section-busy-card {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  height: 44px;
+  padding: 0 var(--sp-4);
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--ink);
+  background: var(--lime);
+  box-shadow: 3px 3px 0 0 var(--ink);
+  font-weight: 600;
+  color: var(--ink);
+  animation: pop-in 320ms var(--spring) both;
+}
+@keyframes section-out { to { opacity: 0; } }
+
+/* ------------------------------------------------------------ busy buttons */
+button.is-busy {
+  cursor: progress !important;
+  opacity: 1 !important;
+  gap: var(--sp-2);
+}
+button.is-busy:disabled { filter: none; }
+
+/* save indicator uses the same spinner */
+.save-state .bspin { --s: 12px; }
+
+/* ----------------------------------------------------------- reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .bspin { animation-duration: 2s; }
+  .brand-ring-arc { animation: none; stroke-dasharray: 32 68; }
+  .brand-fox, .brand-loader::before, .splash-bar span { animation: none; }
+  .splash-bar span { left: 0; width: 100%; opacity: 0.6; }
+  .app-splash, .app-splash .brand-loader, .splash-word, .splash-bar,
+  .app-splash.is-leaving, .app-splash.is-leaving .brand-loader { animation-duration: 1ms; }
+}

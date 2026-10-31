@@ -1,0 +1,39 @@
+/* =========================================================================
+    Atmosphere: mesh gradient, dot grid, grain, spotlight, glass.
+    Use ONLY on hero / welcome / sign-in / onboarding / empty / about screens.
+    Never behind dense controls, tables, editors or colour-critical previews.
+    Source: Electric Lime Visual Style Reference, Appendix E (verbatim).
+    ========================================================================= */
+
+/* 1. Dot grid: 28px cell, 1.6px dot, 9% ink */
+.bg-dots {
+  background-color: var(--bg);
+  background-image: radial-gradient(circle at 2px 2px, color-mix(in srgb, var(--text) 9%, transparent) 1.6px, transparent 0);
+  background-size: 28px 28px;
+}
+
+/* 2. Mesh gradient: 4 blurred blobs, slow drift. Wrap content in .mesh */
+.mesh { position: relative; isolation: isolate; overflow: hidden; background: var(--bg); }
+.mesh::before {
+  content: ""; position: absolute; inset: -20%; z-index: -2;
+  background:
+    radial-gradient(38% 42% at 18% 22%, color-mix(in srgb, var(--lime) 55%, transparent), transparent 70%),
+    radial-gradient(34% 38% at 82% 18%, color-mix(in srgb, var(--pastel-lavender) 55%, transparent), transparent 70%),
+    radial-gradient(40% 40% at 78% 82%, color-mix(in srgb, var(--pastel-sky) 45%, transparent), transparent 70%),
+    radial-gradient(30% 34% at 22% 86%, color-mix(in srgb, var(--pastel-butter) 40%, transparent), transparent 70%);
+  filter: blur(40px) saturate(1.1);
+  animation: mesh-drift 24s ease-in-out infinite alternate;
+}
+/* 3. Grain: kills banding, adds a printed feel. Inline SVG noise, 6% */
+.mesh::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .06; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* 4. Lime spotlight: one soft glow behind a hero element (product shot, key visual) */
+.spotlight { background: radial-gradient(50% 60% at 50% 40%, color-mix(in srgb, var(--lime) 22%, transparent), transparent 70%); }
+
+/* 5. Glass panel: ONLY over a mesh or media, never over plain bg */
+.glass { background: color-mix(in srgb, var(--panel) 72%, transparent); backdrop-filter: blur(14px) saturate(1.2); border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); }
+
+@media (prefers-reduced-motion: reduce) { .mesh::before { animation: none; } }

@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en" class="is-booting">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EvoFox Ronin — WebHID Keyboard Controller &amp; Lighting Studio</title>
+  <meta name="description" content="Customise your Amkette EvoFox Ronin 75% Wireless Mechanical Keyboard directly in browser with WebHID. No install: 21 RGB lighting effects, per-key colours, key remapping, sleep and Fn settings, and every official keyboard shortcut.">
+  <meta name="keywords" content="EvoFox Ronin, EvoFox Ronin Wireless, Amkette EvoFox, WebHID keyboard, 75% mechanical keyboard configurator, RGB lighting studio, keyboard shortcuts, Shinetek MCU, browser keyboard driver">
+  <meta name="author" content="Harsh Prajapati">
+  <meta name="creator" content="Harsh Prajapati">
+  <meta name="publisher" content="Harsh Prajapati">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#f7f8f4">
+  <meta name="color-scheme" content="light">
+  <meta name="application-name" content="EvoFox Ronin WebHID">
+  <meta name="apple-mobile-web-app-title" content="EvoFox Ronin">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EvoFox Ronin WebHID Studio">
+  <meta property="og:url" content="https://evofox-ronin-web-app.harshxgaming7781.workers.dev/">
+  <meta property="og:title" content="EvoFox Ronin | Wireless WebHID Keyboard Configurator">
+  <meta property="og:description" content="Zero-bloat browser configurator for EvoFox Ronin 75% mechanical keyboard. Customize 21 RGB lighting effects, keycaps, and explore the complete connection shortcut guide.">
+  <meta property="og:image" content="https://evofox-ronin-web-app.harshxgaming7781.workers.dev/assets/og-banner.jpg">
+  <meta property="og:image:secure_url" content="https://evofox-ronin-web-app.harshxgaming7781.workers.dev/assets/og-banner.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675">
+  <meta property="og:image:alt" content="EvoFox Ronin 75% Wireless Mechanical Keyboard WebHID Configurator">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://evofox-ronin-web-app.harshxgaming7781.workers.dev/">
+  <meta name="twitter:title" content="EvoFox Ronin | Wireless WebHID Keyboard Configurator">
+  <meta name="twitter:description" content="Direct browser-to-hardware RGB lighting, key remapping, and connection shortcuts guide for EvoFox Ronin 75% wireless keyboard.">
+  <meta name="twitter:image" content="https://evofox-ronin-web-app.harshxgaming7781.workers.dev/assets/og-banner.jpg">
+
+  <!-- Favicon & PWA Manifest -->
+  <link rel="icon" href="./assets/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./src/fonts.css">
+  <link rel="stylesheet" href="./src/tokens.css">
+  <link rel="stylesheet" href="./src/components.css">
+  <link rel="stylesheet" href="./src/motion.css">
+  <link rel="stylesheet" href="./src/toast.css">
+  <link rel="stylesheet" href="./src/backgrounds.css">
+  <link rel="stylesheet" href="./src/styles.css">
+  <link rel="stylesheet" href="./src/callouts.css">
+  <link rel="stylesheet" href="./src/rgb.css">
+  <link rel="stylesheet" href="./src/pages.css">
+  <link rel="stylesheet" href="./src/shell.css">
+  <link rel="stylesheet" href="./src/hero.css">
+  <link rel="stylesheet" href="./src/brand.css">
+  <link rel="stylesheet" href="./src/feedback.css">
+  <link rel="stylesheet" href="./src/select.css">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EvoFox Ronin WebHID Keyboard Configurator",
+    "url": "https://evofox-ronin-web-app.harshxgaming7781.workers.dev/",
+    "description": "Zero-install, browser-based hardware configurator for Amkette EvoFox Ronin 75% Wireless Mechanical Keyboard using WebHID protocol.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Windows, macOS, Linux, ChromeOS",
+    "browserRequirements": "Requires WebHID-compatible browser (Google Chrome, Microsoft Edge, Opera, Brave)",
+    "author": {
+      "@type": "Person",
+      "name": "Harsh Prajapati",
+      "url": "https://www.instagram.com/harshprajapatiofficial/"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- First-load splash (src/feedback.css). Fades into the app once it is ready. -->
+  <div class="app-splash" id="appSplash" role="status" aria-live="polite">
+    <div class="brand-loader">
+      <svg class="brand-ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="brand-ring-track" cx="60" cy="60" r="52"/><circle class="brand-ring-arc" cx="60" cy="60" r="52" pathLength="100"/></svg>
+      <span class="brand-fox" aria-hidden="true"></span>
+    </div>
+    <div class="splash-word">
+      <strong>EvoFox Ronin</strong>
+      <span>Web Configurator</span>
+    </div>
+    <div class="splash-bar" aria-hidden="true"><span></span></div>
+    <span class="sr-only">Loading the configurator…</span>
+  </div>
+
+
+  <div class="app-shell">
+    <!-- Sidebar: brand, live device card, grouped navigation, privacy note -->
+    <aside class="sidebar" aria-label="Main">
+      <div class="sidebar-brand">
+        <img class="brand-mark" src="./assets/brand/app-icon.svg" alt="" width="40" height="40">
+        <div class="brand-title-wrap">
+          <span class="brand-name">EvoFox Ronin</span>
+          <span class="brand-sub">Web Configurator</span>
+        </div>
+      </div>
+
+      <!-- Live device card (filled by updateSidebarDevice in app.js) -->
+      <button type="button" class="device-card" id="sidebarDevice" data-state="off" aria-live="polite">
+        <span class="device-card-icon"><i data-icon="keyboard"></i></span>
+        <span class="device-card-text">
+          <span class="device-card-name">Ronin 75% Wireless</span>
+          <span class="device-card-status" id="sidebarDeviceStatus">Not connected</span>
+        </span>
+        <span class="device-card-dot" aria-hidden="true"></span>
+        <span class="device-card-meter" id="sidebarDeviceMeter" hidden>
+          <span class="meter-track"><span class="meter-fill" id="sidebarBatteryFill"></span></span>
+          <span class="meter-text" id="sidebarBatteryText">--</span>
+        </span>
+      </button>
+
+      <nav class="sidebar-nav device-disconnected" id="sidebarNav" aria-label="Sections">
+        <span class="nav-section">Overview</span>
+        <button class="nav-item active" data-tab="tab-dashboard">
+          <span class="nav-icon"><i data-icon="home"></i></span>
+          <span class="nav-label">Dashboard</span>
+        </button>
+        <span class="nav-section">Customise</span>
+        <button class="nav-item locked-tab" data-tab="tab-backlight">
+          <span class="nav-icon"><i data-icon="bulb"></i></span>
+          <span class="nav-label">RGB Lighting</span><span class="nav-lock" data-tip="Connect your keyboard first" aria-label="Locked until a keyboard is connected"><i data-icon="lock" data-size="14"></i></span>
+        </button>
+        <button class="nav-item locked-tab" data-tab="tab-customrgb">
+          <span class="nav-icon"><i data-icon="palette"></i></span>
+          <span class="nav-label">Custom RGB</span><span class="nav-lock" data-tip="Connect your keyboard first" aria-label="Locked until a keyboard is connected"><i data-icon="lock" data-size="14"></i></span>
+        </button>
+        <button class="nav-item locked-tab" data-tab="tab-keymap">
+          <span class="nav-icon"><i data-icon="keyboard"></i></span>
+          <span class="nav-label">Key Remapping</span><span class="nav-lock" data-tip="Connect your keyboard first" aria-label="Locked until a keyboard is connected"><i data-icon="lock" data-size="14"></i></span>
+        </button>
+        <span class="nav-section">Manage</span>
+        <button class="nav-item locked-tab" data-tab="tab-profiles">
+          <span class="nav-icon"><i data-icon="folder"></i></span>
+          <span class="nav-label">Profiles &amp; Backup</span><span class="nav-lock" data-tip="Connect your keyboard first" aria-label="Locked until a keyboard is connected"><i data-icon="lock" data-size="14"></i></span>
+        </button>
+        <button class="nav-item locked-tab" data-tab="tab-settings">
+          <span class="nav-icon"><i data-icon="sliders"></i></span>
+          <span class="nav-label">Device Settings</span><span class="nav-lock" data-tip="Connect your keyboard first" aria-label="Locked until a keyboard is connected"><i data-icon="lock" data-size="14"></i></span>
+        </button>
+        <span class="nav-section">Help</span>
+        <button class="nav-item" data-tab="tab-guide">
+          <span class="nav-icon"><i data-icon="book"></i></span>
+          <span class="nav-label">Shortcuts &amp; Guide</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="privacy-note">
+          <span class="privacy-icon"><i data-icon="shield"></i></span>
+          <span><strong>Private by design</strong>Runs in your browser. Nothing is tracked.</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Container -->
+    <div class="main-wrapper">
+      <!-- Top bar: page title + device status cluster + actions -->
+      <header class="top-header">
+        <div class="header-title-area">
+          <span class="header-eyebrow" id="viewEyebrow">Overview</span>
+          <h2 id="viewHeading">Dashboard</h2>
+          <p id="viewSubheading">Your keyboard at a glance</p>
+        </div>
+
+        <div class="header-telemetry-bar">
+          <span class="save-state is-idle" id="saveState" role="status" aria-live="polite"></span>
+
+          <div class="device-cluster">
+            <button type="button" class="device-pill" id="statusBadge" data-tip="Connection help" aria-describedby="statusText">
+              <span class="device-dot"></span>
+              <span id="statusText">Disconnected</span>
+              <span class="status-help"><i data-icon="help" data-size="14"></i></span>
+            </button>
+
+            <div class="battery-indicator" id="batteryPill" style="display: none;" data-tip="Battery">
+              <div class="battery-shell">
+                <div class="battery-fill" id="batteryFill" style="width: 100%;"></div>
+              </div>
+              <span id="batteryText">100%</span>
+              <span id="chargeIcon" class="charge-icon" style="display: none;"><i data-icon="bolt"></i></span>
+            </div>
+
+            <div class="device-pill fw-pill" id="fwBadge" style="display: none;" data-tip="Firmware version">
+              <i data-icon="chip" data-size="15"></i><span class="fw-label">FW</span> <span id="fwVersion" class="text-mono">--</span>
+            </div>
+          </div>
+
+          <button class="btn-action-secondary btn-guide" id="btnOpenTroubleshoot" title="Shortcuts, modes and connection help">
+            <span><i data-icon="book"></i> <span class="btn-guide-label">Guide</span></span>
+          </button>
+
+          <button class="btn-connect-primary" id="btnConnect">
+            <span><i data-icon="plug"></i> Connect</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dynamic Views Container -->
+      <div class="view-container">
+
+        <!-- VIEW 1: DASHBOARD OVERVIEW -->
+        <div class="tab-pane active" id="tab-dashboard">
+          
+          <!-- Dynamic Environment Compatibility Notice (Mobile / Unsupported Browser / Desktop Ready) -->
+          <div id="envCompatibilityWrap"></div>
+
+          <!-- State A: Disconnected Guided Welcome & Connection Experience -->
+          <div class="dashboard-welcome" id="dashDisconnectedView">
+
+            <!-- Premium Guided Connection Hero Stage -->
+            <div class="connect-stage-hero mesh" id="connectStageHero">
+              
+              <!-- EvoFox Ronin 75% Wireless: accurate illustration with plug states (src/hero.css) -->
+              <div class="ronin-stage">
+                <div class="ronin-scene" id="roninScene" data-state="idle" data-link="usb" role="img"
+                     aria-label="EvoFox Ronin 75% Wireless keyboard with its Type-C cable">
+                  <div class="ronin-cable" id="roninCable">
+                    <div class="ronin-wire"></div>
+                    <div class="ronin-boot"></div>
+                    <div class="ronin-tip"></div>
+                  </div>
+                  <svg class="ronin-signal" viewBox="0 0 48 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+                    <path style="--i:0" d="M18 24a8.5 8.5 0 0 1 12 0"/>
+                    <path style="--i:1" d="M12 18a17 17 0 0 1 24 0"/>
+                    <path style="--i:2" d="M6 12a25.5 25.5 0 0 1 36 0"/>
+                  </svg>
+                  <div class="ronin-case" id="roninCase">
+                    <span class="ronin-port" title="Type-C port (Fn + 5 for wired mode)"></span>
+                    <div class="ronin-plate"></div>
+                    <!-- keycaps, knob, EVOFOX plate and LED dots are added by renderRoninHero() -->
+                  </div>
+                  <span class="ronin-ripple" aria-hidden="true"></span>
+                  <div class="ronin-floor" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Guided Action & State Hub -->
+              <div class="connect-action-hub">
+                
+                <!-- Status Pill -->
+                <div class="connect-status-pill" id="connectHeroStatus">
+                  <div class="status-indicator-dot" id="connectHeroStatusDot"></div>
+                  <span id="connectHeroStatusText">Your keyboard isn't connected yet</span>
+                </div>
+
+                <!-- Primary Connect CTA Button -->
+                <button class="btn-connect-hero" id="btnHeroConnect">
+                  <i data-icon="plug" data-size="20"></i>
+                  <span class="btn-hero-text">Connect Keyboard</span>
+                </button>
+
+                <!-- Error state (connection failed): filled by app.js -->
+                <div class="error-card" id="connectErrorCard" role="alert" hidden></div>
+
+                <!-- Guidance Callout: Bluetooth Limitation vs Supported 2.4G/USB -->
+                <div class="connect-guidance-pill">
+                  <span class="guidance-icon"><i data-icon="info"></i></span>
+                  <span class="guidance-text">Set up over the <strong>2.4 GHz receiver</strong> <kbd>Fn</kbd> + <kbd>4</kbd> or the <strong>Type-C cable</strong> <kbd>Fn</kbd> + <kbd>5</kbd>. Bluetooth is for typing only.</span>
+                </div>
+
+                <!-- Hardware Slot Illumination Tip -->
+                <div class="connect-mode-hint">
+                  <span class="hint-icon"><i data-icon="bulb" data-size="16"></i></span>
+                  <span>Not sure which mode you're in? Hold <kbd>Fn</kbd>: key <kbd>1</kbd>–<kbd>3</kbd> lights for Bluetooth, <kbd>4</kbd> for 2.4 GHz, <kbd>5</kbd> for wired.</span>
+                </div>
+
+                <!-- Mode Slot Quick Selectors -->
+                <div class="hardware-slots-row" id="welcomeSlotsRow">
+                  <div class="slot-pill" data-mode="bt1"><span>Fn+1</span> BT 1</div>
+                  <div class="slot-pill" data-mode="bt2"><span>Fn+2</span> BT 2</div>
+                  <div class="slot-pill" data-mode="bt3"><span>Fn+3</span> BT 3</div>
+                  <div class="slot-pill active is-supported" data-mode="24g"><span>Fn+4</span> 2.4 GHz</div>
+                  <div class="slot-pill is-supported" data-mode="usb"><span>Fn+5</span> Type-C</div>
+                </div>
+
+                <!-- Interactive Mode Explainer Drawer -->
+                <div class="mode-explainer-drawer" id="welcomeModeDrawer">
+                  <div id="welcomeModeContent">
+                    <strong>2.4 GHz Wireless Mode (FN + 4):</strong> Take the 2.4 GHz receiver out of its slot on the keyboard and plug it into your computer, then press <strong>FN + 4</strong>. If the receiver isn’t recognised, long press <strong>FN + 4</strong> until the LED blinks fast. Works with this app.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- RF Link Offline Notice Banner (Dongle connected, but keyboard in BT mode or sleeping) -->
+            <div class="rf-offline-alert" id="rfOfflineAlert" style="display: none;">
+              <div class="rf-offline-icon"><i data-icon="alert" data-size="26"></i></div>
+              <div class="rf-offline-content">
+                <h4>Receiver found, but the keyboard isn't on 2.4 GHz</h4>
+                <p>It's probably in Bluetooth mode or asleep.</p>
+                <ul>
+                  <li>Press <kbd>Fn</kbd> + <kbd>4</kbd> to switch to 2.4 GHz (hold 3 s to re-pair).</li>
+                  <li>Using the cable instead? Plug it in and press <kbd>Fn</kbd> + <kbd>5</kbd>.</li>
+                  <li>Press any key to wake the keyboard.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 3-Column Connection Method Guidance Cards -->
+            <div class="setup-instructions-grid" id="connectMethodsSection">
+              
+              <!-- 2.4G Wireless Card -->
+              <div class="instruction-card">
+                <div class="instruction-card-header">
+                  <div class="instruction-icon"><i data-icon="signal" data-size="20"></i></div>
+                  <div>
+                    <div class="instruction-title">2.4 GHz Wireless</div>
+                    <div class="instruction-subtitle">USB receiver</div>
+                  </div>
+                </div>
+                <div class="instruction-steps">
+                  <div class="instruction-step">
+                    <span class="instruction-step-num">1</span>
+                    <span>Take the receiver out of its slot on the keyboard and plug it into your computer.</span>
+                  </div>
+                  <div class="instruction-step">
+                    <span class="instruction-step-num">2</span>
+                    <span>Press <kbd>Fn</kbd> + <kbd>4</kbd>. Hold it for 3 s if the receiver needs re-pairing.</span>
+                  </div>
+                  <div class="instruction-step">
+                    <span class="instruction-step-num">3</span>
+                    <span>Click <strong>Connect Keyboard</strong> and choose <em>2.4 Wireless Device</em>.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Wired USB Card -->
+              <div class="instruction-card">
+                <div class="instruction-card-header">
+                  <div class="instruction-icon"><i data-icon="plug" data-size="20"></i></div>
+                  <div>
+                    <div class="instruction-title">Type-C cable</div>
+                    <div class="instruction-subtitle">Charges while connected</div>
+                  </div>
+                </div>
+                <div class="instruction-steps">
+                  <div class="instruction-step">
+                    <span class="instruction-step-num">1</span>
+                    <span>Plug the cable into the keyboard and your computer.</span>
+                  </div>
+                  <div class="instruction-step">
+                    <span class="instruction-step-num">2</span>
+                    <span>Press <kbd>Fn</kbd> + <kbd>5</kbd> to switch to wired mode.</span>
+                  </div>
+                  <div class="instruction-step">
+                    <span class="instruction-step-num">3</span>
+                    <span>Click <strong>Connect Keyboard</strong> and choose your Ronin (it may be listed as <em>Unknown device 1A2C:A157</em>).</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bluetooth Limitation Notice Card -->
+              <div class="instruction-card bluetooth-limitation-card is-warning">
+                <div class="instruction-card-header">
+                  <div class="instruction-icon"><i data-icon="bluetooth" data-size="20"></i></div>
+                  <div>
+                    <div class="instruction-title">Bluetooth</div>
+                    <div class="instruction-subtitle">Typing only, no setup</div>
+                  </div>
+                </div>
+                <div class="instruction-steps">
+                  <div class="instruction-step">
+                    <span class="instruction-step-num">1</span>
+                    <span><kbd>Fn</kbd> + <kbd>1</kbd>, <kbd>2</kbd> or <kbd>3</kbd> connect up to three devices for typing.</span>
+                  </div>
+                  <div class="instruction-step">
+                    <span class="instruction-step-num">2</span>
+                    <span>Operating systems don't let browsers send settings to a keyboard over Bluetooth.</span>
+                  </div>
+                  <div class="instruction-step">
+                    <span class="instruction-step-num">3</span>
+                    <span>Switch to 2.4 GHz or wired to change settings, then switch back. Your settings stay on the keyboard.</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Expandable Troubleshooting Diagnostic Helper -->
+            <div class="connect-troubleshoot-drawer" id="connectTroubleshootDrawer">
+              <button class="btn-troubleshoot-toggle" id="btnToggleConnectHelp">
+                <div class="troubleshoot-toggle-label">
+                  <span><i data-icon="help"></i></span>
+                  <strong>Trouble connecting? Quick fixes</strong>
+                </div>
+                <span class="toggle-arrow" id="troubleshootToggleArrow"><i data-icon="chevronDown"></i></span>
+              </button>
+              <div class="troubleshoot-drawer-content" id="troubleshootDrawerContent" style="display: none;">
+                <div class="troubleshoot-grid">
+                  <div class="troubleshoot-item">
+                    <strong>1. Check the power switch</strong>
+                    <p>The ON/OFF switch is on the right edge of the keyboard, next to the <strong>→</strong> key. Set it to <strong>ON</strong> for 2.4 GHz, or plug the Type-C cable in firmly for wired mode.</p>
+                  </div>
+                  <div class="troubleshoot-item">
+                    <strong>2. Wake Up Sleeping RF Link</strong>
+                    <p>If inactive for a few minutes, the Ronin switches to deep sleep to conserve battery. Tap the <strong>Spacebar</strong> once to wake the 2.4GHz link before clicking Connect.</p>
+                  </div>
+                  <div class="troubleshoot-item">
+                    <strong>3. Direct Motherboard USB Port</strong>
+                    <p>If using a USB hub or monitor pass-through, plug the 2.4GHz receiver or USB-C cable directly into a motherboard USB 2.0 or 3.0 port on your PC.</p>
+                  </div>
+                  <div class="troubleshoot-item">
+                    <strong>4. Browser Permissions Dialog</strong>
+                    <p>Ensure you select <em>Unknown Device (1A2C:A157)</em> or <em>2.4 Wireless Device</em> in the browser prompt and click <strong>Connect</strong> (avoid generic standard keyboard entry if shown).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Feature Showcase (3 Columns) -->
+            <div class="feature-showcase-grid">
+              <div class="feature-showcase-card">
+                <h4><i data-icon="bulb"></i> 21 RGB Lighting Effects</h4>
+                <p>Waves, ripples, lasers, spectrum cycles and more, in 7 colours or multicolour, plus a per-key custom mode.</p>
+              </div>
+              <div class="feature-showcase-card">
+                <h4><i data-icon="keyboard"></i> Key Remapping &amp; Onboard Memory</h4>
+                <p>Remap keys on the normal layer and the Fn layer, paint your own per-key colours, and keep it all in the keyboard’s onboard memory.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- State B: Connected Device Overview -->
+          <div class="dashboard-connected" id="dashConnectedView" style="display: none;">
+            
+            <!-- Hardware Status Banner -->
+            <div class="device-telemetry-banner">
+              <div class="telemetry-item-group">
+                <div class="telemetry-item">
+                  <span class="telemetry-label">Status</span>
+                  <div class="telemetry-val">
+                    <span class="status-dot is-success"></span>
+                    <span>Connected</span>
+                  </div>
+                </div>
+                <div class="telemetry-item">
+                  <span class="telemetry-label">Connection</span>
+                  <span class="telemetry-val" id="dashConnectedMode">Wired (Type-C)</span>
+                </div>
+                <div class="telemetry-item">
+                  <span class="telemetry-label">Battery</span>
+                  <span class="telemetry-val is-key-number" id="dashConnectedBattery">100%</span>
+                </div>
+                <div class="telemetry-item">
+                  <span class="telemetry-label">Firmware</span>
+                  <span class="telemetry-val is-mono" id="dashConnectedFw">--</span>
+                </div>
+              </div>
+              <div class="telemetry-action-group">
+                <button class="btn-action-danger" id="btnDashDisconnect">
+                  <span><i data-icon="plug"></i> Disconnect</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Hardware Connection & Active Mode Centre -->
+            <div class="surface-card mode-status-center">
+              <div class="mode-status-header">
+                <div class="card-title-group">
+                  <span class="section-icon"><i data-icon="signal"></i></span>
+                  <div>
+                    <h3>Connection</h3>
+                    <p>
+                      How your keyboard is connected, and how to switch modes
+                    </p>
+                  </div>
+                </div>
+                <button class="btn-action-secondary btn-sm" id="btnDashOpenGuide">
+                  <i data-icon="book"></i> Shortcuts guide
+                </button>
+              </div>
+
+              <div class="mode-status-grid">
+                <!-- Verified WebHID Pipe Box -->
+                <div class="mode-box verified-box">
+                  <div class="mode-box-label">Connected over</div>
+                  <div class="mode-box-val" id="dashVerifiedPipeVal">
+                    <span class="mode-icon" id="dashVerifiedPipeIcon"><i data-icon="plug" data-size="20"></i></span>
+                    <span id="dashVerifiedPipeTitle">Wired (Type-C)</span>
+                  </div>
+                  <div class="mode-box-sub" id="dashVerifiedPipeDesc">
+                    Connected with the Type-C cable (PID 0xA157). The keyboard is charging.
+                  </div>
+                  <div class="mode-verified-badge" id="dashVerifiedPipeBadge">
+                    <i data-icon="check"></i> Verified Ronin
+                  </div>
+                </div>
+
+                <!-- Physical Hardware Check Box -->
+                <div class="mode-box physical-box">
+                  <div class="mode-box-label">Check on the keyboard</div>
+                  <div class="physical-tip">
+                    <div class="tip-title"><i data-icon="bulb"></i> Which mode is it in?</div>
+                    <span>Hold <kbd>Fn</kbd>: key <kbd>1</kbd>–<kbd>3</kbd> lights for Bluetooth, <kbd>4</kbd> for 2.4 GHz, <kbd>5</kbd> for wired.</span>
+                  </div>
+                  <div class="hardware-slots-row" id="dashSlotsRow">
+                    <div class="slot-pill" data-mode="bt1"><span>Fn+1</span> BT 1</div>
+                    <div class="slot-pill" data-mode="bt2"><span>Fn+2</span> BT 2</div>
+                    <div class="slot-pill" data-mode="bt3"><span>Fn+3</span> BT 3</div>
+                    <div class="slot-pill active" data-mode="24g"><span>Fn+4</span> 2.4G</div>
+                    <div class="slot-pill" data-mode="usb"><span>Fn+5</span> USB</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Mode Explainer Drawer -->
+              <div class="mode-explainer-drawer" id="dashModeDrawer">
+                <div id="dashModeContent">
+                  <!-- Injected dynamically in app.js -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick-Access Cards Grid (6 Modules) -->
+            <div class="quick-nav-grid stagger">
+              
+              <!-- Card 1: RGB Lighting -->
+              <div class="quick-nav-card" data-jump="tab-backlight" style="--i: 0" role="button" tabindex="0">
+                <div class="quick-nav-header">
+                  <h4><i data-icon="bulb"></i> RGB Backlight</h4>
+                  <span class="quick-nav-status" id="quickLightStatus">Flow</span>
+                </div>
+                <p class="quick-nav-desc">Tune active lighting effects, speed, brightness, and reactive wavefront ripples.</p>
+                <div class="quick-nav-footer">
+                  <button class="quick-nav-btn">Open lighting <i data-icon="arrowRight" data-size="16"></i></button>
+                </div>
+              </div>
+
+              <!-- Card 3: Key Remapping -->
+              <div class="quick-nav-card" data-jump="tab-keymap" style="--i: 2" role="button" tabindex="0">
+                <div class="quick-nav-header">
+                  <h4><i data-icon="keyboard"></i> Key Remapping</h4>
+                  <span class="quick-nav-status" id="quickRemapStatus">No remaps yet</span>
+                </div>
+                <p class="quick-nav-desc">Assign custom keys, media controls, and FN layer bindings to the 79-key matrix.</p>
+                <div class="quick-nav-footer">
+                  <button class="quick-nav-btn">Remap keys <i data-icon="arrowRight" data-size="16"></i></button>
+                </div>
+              </div>
+
+              <!-- Card 4: Custom RGB -->
+              <div class="quick-nav-card" data-jump="tab-customrgb" style="--i: 3" role="button" tabindex="0">
+                <div class="quick-nav-header">
+                  <h4><i data-icon="palette"></i> Custom Per-Key RGB</h4>
+                  <span class="quick-nav-status">Saved on keyboard</span>
+                </div>
+                <p class="quick-nav-desc">Paint each key its own colour and save it to the keyboard’s onboard memory.</p>
+                <div class="quick-nav-footer">
+                  <button class="quick-nav-btn">Paint keys <i data-icon="arrowRight" data-size="16"></i></button>
+                </div>
+              </div>
+
+              <!-- Card 5: Profiles & Backup -->
+              <div class="quick-nav-card" data-jump="tab-profiles" style="--i: 4" role="button" tabindex="0">
+                <div class="quick-nav-header">
+                  <h4><i data-icon="folder"></i> Profiles & Backup</h4>
+                  <span class="quick-nav-status" id="quickProfileStatus">Default Profile</span>
+                </div>
+                <p class="quick-nav-desc">Create lighting presets and export/import JSON configurations for seamless backup.</p>
+                <div class="quick-nav-footer">
+                  <button class="quick-nav-btn">Open profiles <i data-icon="arrowRight" data-size="16"></i></button>
+                </div>
+              </div>
+
+              <!-- Card 6: Device Settings -->
+              <div class="quick-nav-card" data-jump="tab-settings" style="--i: 5" role="button" tabindex="0">
+                <div class="quick-nav-header">
+                  <h4><i data-icon="settings"></i> Hardware Settings</h4>
+                  <span class="quick-nav-status" id="quickSettingsStatus">Sleep 2 min · Response L1</span>
+                </div>
+                <p class="quick-nav-desc">Sleep timer, key response time, Fn layer and factory reset.</p>
+                <div class="quick-nav-footer">
+                  <button class="quick-nav-btn">Device Settings <i data-icon="arrowRight" data-size="16"></i></button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Standardized Keyboard Stage Preview -->
+            <div class="surface-card visualizer-card">
+              <div class="card-header-row">
+                <div class="card-title-group">
+                  <h3>Live preview</h3>
+                  <span class="live-tag">Live</span>
+                </div>
+                <span class="card-subtitle">Click keys to see reactive effects</span>
+              </div>
+              <div class="keyboard-stage" id="keyboardStageDashboard"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- VIEW 2: RGB LIGHTING -->
+        <div class="tab-pane" id="tab-backlight">
+          <!-- Connection Required Banner -->
+          <div class="connection-required-card" id="connReqBacklight">
+            <div class="req-left">
+              <div class="req-icon"><i data-icon="plug"></i></div>
+              <div class="req-content">
+                <h4>Connect your keyboard to start</h4>
+                <p>Plug in the Type-C cable or the 2.4 GHz receiver, then connect to change lighting live.</p>
+              </div>
+            </div>
+            <button class="btn-action-secondary btn-connect-trigger">
+              <i data-icon="plug"></i> Connect keyboard
+            </button>
+          </div>
+
+          <div class="rgb-layout" id="backlightControlGrid">
+
+            <!-- Preview: what's selected, whether it's on the keyboard, live sync, the keyboard -->
+            <section class="surface-card rgb-preview-card" aria-label="Live preview">
+              <div class="rgb-preview-head">
+                <div class="rgb-now">
+                  <span class="rgb-now-icon" id="rgbNowIcon" aria-hidden="true"></span>
+                  <div class="rgb-now-text">
+                    <span class="eyebrow">Selected effect</span>
+                    <h3 id="lblSelectedLightMode">Flow</h3>
+                  </div>
+                  <div class="lighting-state-bar" id="lightingStateBar">
+                    <span class="lighting-state-badge verified" id="badgeHwLightMode"><span>On keyboard</span></span>
+                    <span class="lighting-state-badge pending" id="badgePendingLight" style="display: none;"><span>Not applied yet</span></span>
+                  </div>
+                </div>
+
+                <label class="live-sync-toggle">
+                  <input type="checkbox" class="switch" id="checkLiveSync" checked role="switch" aria-describedby="liveSyncHint">
+                  <span class="live-sync-text">
+                    <strong><i data-icon="bolt" data-size="15"></i> Live Sync</strong>
+                    <small id="liveSyncHint">Your keyboard follows every change</small>
+                  </span>
+                </label>
+              </div>
+
+              <div class="keyboard-stage" id="keyboardStageBacklight"></div>
+
+              <div class="rgb-preview-foot">
+                <p id="lightModeDesc" class="rgb-desc"></p>
+                <div class="reactive-guide-bar" id="reactiveGuideBar" style="display: none;">
+                  <div class="reactive-guide-label">
+                    <span class="reactive-pulse-dot"></span>
+                    <span id="reactiveGuideText">Reacts to typing</span>
+                  </div>
+                  <button class="btn-action-secondary btn-xs" id="btnToggleAutoDemo" type="button">
+                    <span>Auto demo</span>
+                  </button>
+                </div>
+                <div class="preset-row" role="group" aria-label="Quick presets">
+                  <span class="preset-label"><i data-icon="sparkle" data-size="15"></i> Presets</span>
+                  <button class="preset-chip" id="presetRainbowWave"><span class="preset-swatch is-rainbow"></span> Rainbow Wave</button>
+                  <button class="preset-chip" id="presetCyberpunk"><span class="preset-swatch is-cyan"></span> Cyber Neon</button>
+                  <button class="preset-chip" id="presetBreathing"><span class="preset-swatch is-pulse"></span> Cyan Pulse</button>
+                  <button class="preset-chip" id="presetStealth"><span class="preset-swatch is-off"></span> Stealth Off</button>
+                </div>
+              </div>
+            </section>
+
+            <div class="rgb-controls">
+              <!-- Effects gallery -->
+              <section class="surface-card rgb-effects-card" aria-labelledby="effectsTitle">
+                <div class="card-header-row">
+                  <h3 id="effectsTitle">Effects</h3>
+                  <span class="card-subtitle">21 effects + Off</span>
+                </div>
+                <div class="effect-filters" id="effectFilters" role="group" aria-label="Filter effects">
+                  <button type="button" class="effect-filter is-on" data-cat="all" aria-pressed="true">All</button>
+                  <button type="button" class="effect-filter" data-cat="waves" aria-pressed="false">Waves</button>
+                  <button type="button" class="effect-filter" data-cat="reactive" aria-pressed="false">Reactive</button>
+                  <button type="button" class="effect-filter" data-cat="ambient" aria-pressed="false">Solid &amp; more</button>
+                </div>
+                <div class="mode-picker-grid" id="modePickerGrid" role="listbox" aria-label="Lighting effects"></div>
+                <select id="lightModeSelect" hidden></select>
+              </section>
+
+              <!-- Adjust: brightness, speed, colour, apply -->
+              <section class="surface-card rgb-adjust-card" aria-labelledby="adjustTitle">
+                <div class="card-header-row">
+                  <h3 id="adjustTitle">Adjust</h3>
+                  <span class="card-subtitle">5 levels each</span>
+                </div>
+
+                <div class="control-field level-field" id="fieldBrightness">
+                  <div class="level-head">
+                    <label for="sliderBrightness"><i data-icon="sun" data-size="16"></i> Brightness</label>
+                    <span class="level-value"><span id="valBrightness" class="control-value">5</span><span class="level-max">/5</span></span>
+                  </div>
+                  <input type="range" class="level-range" id="sliderBrightness" min="1" max="5" step="1" value="5">
+                  <div class="level-ticks" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+                </div>
+
+                <div class="control-field level-field" id="fieldSpeed">
+                  <div class="level-head">
+                    <label for="sliderSpeed"><i data-icon="speed" data-size="16"></i> Speed</label>
+                    <span class="level-value"><span id="valSpeed" class="control-value">3</span><span class="level-max">/5</span></span>
+                  </div>
+                  <input type="range" class="level-range" id="sliderSpeed" min="1" max="5" step="1" value="3">
+                  <div class="level-ticks" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+                </div>
+
+                <div class="control-field" id="fieldPalette">
+                  <div class="level-head">
+                    <label id="paletteLabel">Colour</label>
+                  </div>
+                  <div class="palette-row" id="colorPaletteContainer"></div>
+                </div>
+
+                <p class="field-hint" id="modeCapsHint" aria-live="polite"></p>
+
+                <div class="rgb-apply-row">
+                  <button class="btn-action-primary" id="btnApplyLight">
+                    <i data-icon="bolt"></i> Apply to keyboard
+                  </button>
+                  <span class="rgb-apply-hint">Reverse direction with <kbd>Fn</kbd> + <kbd>←</kbd></span>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 4: KEY REMAPPING -->
+        <div class="tab-pane" id="tab-keymap">
+          <!-- Connection Required Banner -->
+          <div class="connection-required-card" id="connReqKeymap">
+            <div class="req-left">
+              <div class="req-icon"><i data-icon="plug"></i></div>
+              <div class="req-content">
+                <h4>Connect your keyboard to start</h4>
+                <p>Key remaps are saved straight to the keyboard, so it needs to be connected.</p>
+              </div>
+            </div>
+            <button class="btn-action-secondary btn-connect-trigger">
+              <i data-icon="plug"></i> Connect keyboard
+            </button>
+          </div>
+
+          <div class="panel-grid-2col" id="keymapControlGrid">
+            <!-- Left Remap Inspector Column -->
+            <div class="surface-card">
+              <div class="card-header-row">
+                <h3>Selected key</h3>
+                <span class="card-subtitle">Normal and Fn layer</span>
+              </div>
+
+              <div class="remap-inspector-box">
+                <div class="remap-inspector-header">
+                  <span class="telemetry-label">Selected key</span>
+                  <span id="inspectorKeyIndex" class="remap-key-index">Click a key</span>
+                </div>
+                <div class="remap-key-badge" id="inspectorKeyName">
+                  <span>None yet</span>
+                </div>
+                <div class="remap-current-binding" id="inspectorCurrentBinding">
+                  Click a key on the keyboard to start
+                </div>
+              </div>
+
+              <div class="control-field remap-layer-field">
+                <label for="selectRemapLayer">Layer</label>
+                <select id="selectRemapLayer">
+                  <option value="0">Normal layer</option>
+                  <option value="1">Fn layer (while holding Fn)</option>
+                </select>
+                <p class="field-hint">Fn layer keys work while Fn is held.</p>
+              </div>
+
+              <div class="remap-action-stack">
+                <button class="btn-action-primary" id="btnOpenRemapPicker">
+                  <span><i data-icon="keyboard"></i> Choose new function</span>
+                </button>
+                <button class="btn-action-danger" id="btnResetRemaps">
+                  <span><i data-icon="refresh"></i> Reset all keys</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right Visualizer Column -->
+            <div class="surface-card visualizer-card">
+              <div class="card-header-row">
+                <div class="card-title-group">
+                  <h3>Pick a key</h3>
+                  <span class="live-tag">79 keys</span>
+                </div>
+                <span class="card-subtitle">Click any key, then choose what it should do</span>
+              </div>
+              <div class="keyboard-stage" id="keyboardStageRemap"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 5: CUSTOM PER-KEY RGB -->
+        <div class="tab-pane" id="tab-customrgb">
+          <!-- Connection Required Banner -->
+          <div class="connection-required-card" id="connReqCustomRgb">
+            <div class="req-left">
+              <div class="req-icon"><i data-icon="plug"></i></div>
+              <div class="req-content">
+                <h4>Connect your keyboard to start</h4>
+                <p>Per-key colours are saved straight to the keyboard, so it needs to be connected.</p>
+              </div>
+            </div>
+            <button class="btn-action-secondary btn-connect-trigger">
+              <i data-icon="plug"></i> Connect keyboard
+            </button>
+          </div>
+
+          <div class="panel-grid-2col" id="customRgbControlGrid">
+            <!-- Left Toolbar Column -->
+            <div class="surface-card">
+              <div class="card-header-row">
+                <h3>Brush</h3>
+                <span class="card-subtitle">Saved on the keyboard</span>
+              </div>
+
+              <div class="guidance-banner">
+                <div class="guidance-icon"><i data-icon="palette"></i></div>
+                <div class="guidance-content">
+                  <h4>Paint your keys</h4>
+                  <div class="guidance-pills">
+                    <span class="step-chip"><span class="step-chip-num">1</span> Pick a colour</span>
+                    <span class="step-chip"><span class="step-chip-num">2</span> Click keys</span>
+                    <span class="step-chip"><span class="step-chip-num">3</span> Save to keyboard</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-field">
+                <label>Colour</label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                  <input type="color" id="pickerCustomRgb" value="#ff0000">
+                  <span id="brushColorHex" class="color-hex">#FF0000</span>
+                </div>
+              </div>
+
+              <div class="control-field">
+                <label>Keyboard colours</label>
+                <div class="palette-row" id="customRgbSwatches" role="group" aria-label="Brush colours">
+                  <!-- Lime + the keyboard's own colours (COLOR_PALETTE), added by app.js -->
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem;">
+                <button class="btn-action-secondary" id="btnSetAllKeys" style="height: 40px;"><i data-icon="grid"></i> Fill all keys</button>
+                <button class="btn-action-secondary" id="btnUndoCustomRgb" style="height: 40px;"><i data-icon="undo"></i> Undo</button>
+              </div>
+
+              <button class="btn-action-primary" id="btnUploadCustomRgb" style="margin-top: 1rem; height: 44px;">
+                <i data-icon="save"></i> Save to keyboard
+              </button>
+            </div>
+
+            <!-- Right Visualizer Column -->
+            <div class="surface-card visualizer-card">
+              <div class="card-header-row">
+                <div class="card-title-group">
+                  <h3>Paint the keyboard</h3>
+                  <span class="live-tag">Paint</span>
+                </div>
+                <span class="card-subtitle">Click a key to paint it, click again to clear</span>
+              </div>
+              <div class="keyboard-stage" id="keyboardStageCustomRgb"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 6: PROFILES & BACKUP (Offline Supported) -->
+        <div class="tab-pane" id="tab-profiles">
+          <div class="panel-grid-2col">
+            <div class="surface-card">
+              <div class="card-header-row">
+                <h3>Named Profiles</h3>
+                <span class="card-subtitle">Kept in this browser</span>
+              </div>
+              
+              <div class="control-field">
+                <label for="selectProfileList">Active Profile</label>
+                <div class="field-row">
+                  <select id="selectProfileList">
+                    <option value="default">Default Profile</option>
+                    <option value="gaming">Gaming FPS</option>
+                    <option value="night">Nocturnal Coding</option>
+                  </select>
+                  <button class="btn-action-danger field-icon-btn" id="btnDeleteProfile" aria-label="Delete profile" data-tip="Delete profile"><i data-icon="trash"></i></button>
+                </div>
+              </div>
+
+              <div class="control-field">
+                <label>Create New Profile</label>
+                <div class="field-row">
+                  <input type="text" id="inputNewProfileName" placeholder="e.g. Competitive Valorant">
+                  <button class="btn-action-secondary field-btn" id="btnCreateProfile"><i data-icon="plus"></i> Add</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="surface-card">
+              <div class="card-header-row">
+                <h3>Backup & Restore</h3>
+                <span class="card-subtitle">Share or restore as a file</span>
+              </div>
+              <p class="modal-body-text">
+                Export your lighting configurations, per-key RGB artwork, and custom key remaps as a standalone backup file, or restore a previously saved JSON profile. Works 100% offline.
+              </p>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                <button class="btn-action-primary" id="btnExportProfileJson" style="height: 42px; padding: 0 18px; width: auto;"><i data-icon="download"></i> Export Profile JSON</button>
+                <button class="btn-action-secondary" id="btnImportProfileJson" style="height: 42px; padding: 0 18px; width: auto;"><i data-icon="upload"></i> Import Profile JSON</button>
+                <input type="file" id="fileProfileInput" accept=".json" style="display: none;">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 7: DEVICE SETTINGS & TERMINAL -->
+        <div class="tab-pane" id="tab-settings">
+          <!-- Connection Required Banner -->
+          <div class="connection-required-card" id="connReqSettings">
+            <div class="req-left">
+              <div class="req-icon"><i data-icon="plug"></i></div>
+              <div class="req-content">
+                <h4>Connect your keyboard to start</h4>
+                <p>Sleep timer, key response and Fn layer are stored on the keyboard, so it needs to be connected.</p>
+              </div>
+            </div>
+            <button class="btn-action-secondary btn-connect-trigger">
+              <i data-icon="plug"></i> Connect keyboard
+            </button>
+          </div>
+
+          <div class="panel-grid-2col" id="settingsControlGrid">
+            <div class="surface-card">
+              <div class="card-header-row">
+                <h3>Power &amp; Performance</h3>
+                <span class="card-subtitle">Saved on the keyboard</span>
+              </div>
+
+              <div class="control-field">
+                <label for="selectSleepLevel">Sleep timer</label>
+                <select id="selectSleepLevel"></select>
+                <p class="field-hint">
+                  Light sleep turns the backlight off; deep sleep saves the most battery. Press any key to wake.
+                </p>
+              </div>
+
+              <div class="control-field">
+                <label for="selectResponseLevel">Key response time</label>
+                <select id="selectResponseLevel"></select>
+                <p class="field-hint">
+                  Level 1 is the fastest. Times are from the official EvoFox software.
+                </p>
+              </div>
+
+              <div class="control-field">
+                <label for="selectFnLayerMode">Fn layer</label>
+                <select id="selectFnLayerMode"></select>
+                <p class="field-hint">
+                  “Press once” makes Fn toggle the Fn layer instead of holding it.
+                </p>
+              </div>
+
+              <button class="btn-action-primary" id="btnApplySettings" style="margin-top: 8px;">
+                <i data-icon="save"></i> Save Settings
+              </button>
+            </div>
+
+            <div class="surface-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="card-header-row">
+                  <h3>Factory Reset & Recovery</h3>
+                  <span class="card-subtitle">Can’t be undone</span>
+                </div>
+                <p class="modal-body-text">
+                  Resets all key assignments, restores the default lighting, clears custom macros and resets the power settings. Same as holding <strong>Fn + Esc</strong> for 5 seconds.
+                </p>
+              </div>
+              <button class="btn-action-danger" id="btnFactoryReset">
+                <span><i data-icon="alert"></i> Restore Factory Defaults</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Developer log (collapsed: for troubleshooting only) -->
+          <details class="surface-card dev-log">
+            <summary>
+              <span class="dev-log-title"><i data-icon="chip"></i> Developer log</span>
+              <span class="dev-log-hint">What the app and keyboard said to each other. Useful for bug reports.</span>
+              <i data-icon="chevronDown" class="dev-log-chevron"></i>
+            </summary>
+            <div class="dev-log-body">
+              <div class="dev-log-actions"><button class="btn-action-secondary btn-xs" id="btnClearLogs">Clear</button></div>
+              <div class="terminal-card" id="logConsole"></div>
+            </div>
+          </details>
+        </div>
+
+        <!-- Dedicated Full-Width Tab: Keyboard Quick Guide & Hardware Manual -->
+        <div class="tab-pane" id="tab-guide">
+          <div class="guide-page-container">
+
+            <!-- Hero Header & Amkette Reference -->
+            <div class="guide-page-header">
+              <div class="guide-page-intro">
+                <div class="guide-page-badge">
+                  <span><i data-icon="fox"></i></span>
+                  <span>EvoFox Ronin 75% Wireless</span>
+                </div>
+                <h2>Keyboard guide</h2>
+                <p>Every Fn shortcut, how to switch between Bluetooth, 2.4 GHz and wired, and the physical controls, checked against the official Amkette guide.</p>
+              </div>
+              <div class="guide-header-actions">
+                <a href="https://www.amkette.com/pages/evofox-ronin-wireless-keyboard-help" target="_blank" rel="noopener noreferrer" class="btn-action-secondary">
+                  <span><i data-icon="book"></i> Official Support Manual</span>
+                  <i data-icon="external" data-size="16"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Quick reference: the four most-used shortcut groups -->
+            <div class="quick-ref-grid">
+              <section class="quick-ref-card">
+                <header class="qref-head">
+                  <span class="qref-icon"><i data-icon="signal"></i></span>
+                  <h4>Connect</h4>
+                </header>
+                <ul class="qref-list">
+                  <li><span class="qref-keys"><kbd>Fn</kbd><span class="qref-plus">+</span><kbd>1–3</kbd></span><span class="qref-label">Bluetooth</span></li>
+                  <li><span class="qref-keys"><kbd>Fn</kbd><span class="qref-plus">+</span><kbd>4</kbd></span><span class="qref-label">2.4 GHz</span></li>
+                  <li><span class="qref-keys"><kbd>Fn</kbd><span class="qref-plus">+</span><kbd>5</kbd></span><span class="qref-label">Type-C cable</span></li>
+                </ul>
+              </section>
+              <section class="quick-ref-card">
+                <header class="qref-head">
+                  <span class="qref-icon"><i data-icon="bulb"></i></span>
+                  <h4>Lighting</h4>
+                </header>
+                <ul class="qref-list">
+                  <li><span class="qref-keys"><kbd>Fn</kbd><span class="qref-plus">+</span><kbd>\</kbd></span><span class="qref-label">Next effect</span></li>
+                  <li><span class="qref-keys"><kbd>Fn</kbd><span class="qref-plus">+</span><kbd>Del</kbd></span><span class="qref-label">Lights on / off</span></li>
+                  <li><span class="qref-keys"><kbd>Fn</kbd><span class="qref-plus">+</span><kbd>→</kbd></span><span class="qref-label">Next colour</span></li>
+                  <li><span class="qref-keys"><kbd>Fn</kbd><span class="qref-plus">+</span><kbd>↑ ↓</kbd></span><span class="qref-label">Brightness</span></li>
+                </ul>
+              </section>
+              <section class="quick-ref-card">
+                <header class="qref-head">
+                  <span class="qref-icon"><i data-icon="search"></i></span>
+                  <h4>Which mode am I in?</h4>
+                </header>
+                <p class="qref-note">Hold <kbd>Fn</kbd>. The active number key lights up.</p>
+                <ul class="qref-list">
+                  <li><span class="qref-keys"><kbd>1–3</kbd></span><span class="qref-label">Bluetooth</span></li>
+                  <li><span class="qref-keys"><kbd>4</kbd></span><span class="qref-label">2.4 GHz</span></li>
+                  <li><span class="qref-keys"><kbd>5</kbd></span><span class="qref-label">Type-C cable</span></li>
+                </ul>
+              </section>
+              <section class="quick-ref-card">
+                <header class="qref-head">
+                  <span class="qref-icon"><i data-icon="laptop"></i></span>
+                  <h4>System</h4>
+                </header>
+                <ul class="qref-list">
+                  <li><span class="qref-keys"><kbd>Fn</kbd><span class="qref-plus">+</span><kbd>A</kbd></span><span class="qref-label">Windows mode</span></li>
+                  <li><span class="qref-keys"><kbd>Fn</kbd><span class="qref-plus">+</span><kbd>S</kbd></span><span class="qref-label">Mac mode</span></li>
+                  <li><span class="qref-keys"><kbd>Fn</kbd><span class="qref-plus">+</span><kbd>Win</kbd></span><span class="qref-label">Lock Windows key</span></li>
+                </ul>
+              </section>
+            </div>
+
+            <!-- Hardware Mode Verification Showcase -->
+            <div class="surface-card" style="margin-top: 1.5rem;">
+              <div class="card-header-row">
+                <div class="card-title-group">
+                  <span class="section-icon"><i data-icon="search"></i></span>
+                  <div>
+                    <h3>Which mode is your keyboard in?</h3>
+                    <p class="modal-subtitle">
+                      See which connection is active, and how to switch
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mode-status-grid" style="margin-top: 1rem;">
+                <!-- WebHID Requirement Note -->
+                <div class="mode-box verified-box">
+                  <div class="mode-box-label">Works with this app</div>
+                  <div class="mode-box-val">
+                    <span class="mode-icon"><i data-icon="signal" data-size="20"></i></span>
+                    <span>2.4 GHz receiver or Type-C cable</span>
+                  </div>
+                  <div class="mode-box-sub">
+                    Change lighting, keys and settings over the 2.4 GHz receiver or the Type-C cable. Browsers can't send settings over Bluetooth.
+                  </div>
+                </div>
+
+                <!-- Physical Mode Verification Check -->
+                <div class="mode-box physical-box">
+                  <div class="mode-box-label">Check on the keyboard</div>
+                  <div class="physical-tip">
+                    <div class="tip-title"><i data-icon="bulb"></i> Hold Fn</div>
+                    <span>Key <kbd>1</kbd>–<kbd>3</kbd> lights for Bluetooth, <kbd>4</kbd> for 2.4 GHz, <kbd>5</kbd> for wired.</span>
+                  </div>
+                  <div class="hardware-slots-row" id="pageSlotsRow">
+                    <div class="slot-pill" data-mode="bt1"><span>Fn+1</span> BT 1</div>
+                    <div class="slot-pill" data-mode="bt2"><span>Fn+2</span> BT 2</div>
+                    <div class="slot-pill" data-mode="bt3"><span>Fn+3</span> BT 3</div>
+                    <div class="slot-pill active" data-mode="24g"><span>Fn+4</span> 2.4G</div>
+                    <div class="slot-pill" data-mode="usb"><span>Fn+5</span> USB</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Mode Explainer Drawer -->
+              <div class="mode-explainer-drawer" id="pageModeDrawer" style="margin-top: 1rem;">
+                <div id="pageModeContent">
+                  <strong>2.4 GHz Wireless Mode (FN + 4):</strong> Take the 2.4 GHz receiver out of its slot on the keyboard and plug it into your computer, then press <strong>FN + 4</strong>. If the receiver isn’t recognised, long press <strong>FN + 4</strong> until the LED blinks fast. Works with this app.
+                </div>
+              </div>
+            </div>
+
+            <!-- Search & Filters Surface -->
+            <div class="guide-filter-panel" style="margin-top: 1.5rem;">
+              <div class="guide-search-wrap">
+                <span class="guide-search-icon"><i data-icon="search" data-size="16"></i></span>
+                <input type="search" id="pageGuideSearchInput" class="guide-search-input" placeholder="Search shortcuts (e.g. Bluetooth, 2.4G, RGB, Brightness, Mac, Battery, Knob, Reset)..." aria-label="Search shortcuts">
+                <kbd class="guide-search-kbd" aria-hidden="true">/</kbd>
+                <button type="button" class="guide-search-clear" data-clear="pageGuideSearchInput" aria-label="Clear search" data-tip="Clear search" hidden><i data-icon="x" data-size="16"></i></button>
+              </div>
+
+              <div class="guide-categories-nav" id="pageGuideCatNav" style="margin-top: 1rem;">
+                <button class="guide-cat-btn active" data-cat="all"><i data-icon="brand" data-size="16"></i> All Shortcuts (36)</button>
+                <button class="guide-cat-btn" data-cat="connectivity"><i data-icon="signal" data-size="16"></i> Connection Modes (5)</button>
+                <button class="guide-cat-btn" data-cat="detection"><i data-icon="battery" data-size="16"></i> Mode Check &amp; Battery (2)</button>
+                <button class="guide-cat-btn" data-cat="backlight"><i data-icon="bulb" data-size="16"></i> Backlighting (8)</button>
+                <button class="guide-cat-btn" data-cat="system"><i data-icon="settings" data-size="16"></i> OS Mode, Win Lock &amp; Reset (4)</button>
+                <button class="guide-cat-btn" data-cat="hardware"><i data-icon="knob" data-size="16"></i> Volume Knob &amp; Switches (5)</button>
+                <button class="guide-cat-btn" data-cat="multimedia"><i data-icon="music" data-size="16"></i> Media Keys (12)</button>
+              </div>
+            </div>
+
+            <!-- Shortcuts Responsive Grid -->
+            <div class="page-guide-shortcuts-container" id="pageGuideShortcutsContainer" style="margin-top: 1.5rem;">
+              <!-- Injected by JavaScript -->
+            </div>
+
+            <!-- Setup Walkthrough & Troubleshooting FAQ -->
+            <div class="guide-faq-section">
+              <h3 class="guide-faq-title">
+                <span><i data-icon="sparkle"></i></span>
+                <span>WebHID Setup &amp; Troubleshooting Guide</span>
+              </h3>
+
+              <div class="guide-steps-grid">
+                <div class="guide-step-card">
+                  <div class="step-num">1</div>
+                  <h4>Select Keyboard Mode</h4>
+                  <p>Press <strong>FN + 4</strong> for 2.4 GHz wireless or <strong>FN + 5</strong> for Type-C wired. Verify by holding <strong>Fn</strong> to see key 4 or 5 light up.</p>
+                </div>
+                <div class="guide-step-card">
+                  <div class="step-num">2</div>
+                  <h4>Plug in Receiver or Cable</h4>
+                  <p>Insert the 2.4 GHz USB receiver into a USB port on your PC, or plug the braided Type-C cable firmly into the keyboard.</p>
+                </div>
+                <div class="guide-step-card">
+                  <div class="step-num">3</div>
+                  <h4>Authorize WebHID</h4>
+                  <p>Click <strong>Connect Device</strong> in this app and select the recognized device: <em>Unknown Device (1A2C:A157)</em> or <em>2.4 Wireless Device</em>.</p>
+                </div>
+              </div>
+
+              <!-- FAQ Cards -->
+              <div class="guide-faq-grid">
+                <div class="faq-card">
+                  <h4><i data-icon="alert"></i> Why can't I configure over Bluetooth (Fn+1/2/3)?</h4>
+                  <p>Over Bluetooth, your computer doesn’t let browsers reach the keyboard’s settings channel (<code>0xFF02:0x0002</code>), so this app can’t see it. Bluetooth is great for everyday typing; switch to <strong>2.4G (Fn+4)</strong> or <strong>Wired USB (Fn+5)</strong> to tune lighting or remap keys.</p>
+                </div>
+                <div class="faq-card">
+                  <h4><i data-icon="refresh"></i> The 2.4 GHz receiver isn’t recognised</h4>
+                  <p>Long press <strong>FN + 4</strong> until the LED blinks fast, with the receiver plugged in. That re-pairs the keyboard with it.</p>
+                </div>
+                <div class="faq-card">
+                  <h4><i data-icon="alert"></i> How do I perform a complete factory reset?</h4>
+                  <p>Press and hold <strong>FN + Esc</strong> for 5 seconds. This resets all settings to default. You can also use <strong>Restore Factory Defaults</strong> in Device Settings.</p>
+                </div>
+                <div class="faq-card">
+                  <h4><i data-icon="battery"></i> How does battery charging work?</h4>
+                  <p>Charge it with the provided Type-C cable. In Bluetooth mode, the battery percentage shows on the connected device. In 2.4 GHz or wired mode, this app shows it in the top bar.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- App footer: credit on every screen and tab -->
+        <footer class="app-footer">
+          <span class="app-footer-credit">Made with <i data-icon="heart"></i> by <a href="https://www.instagram.com/harshprajapatiofficial/" target="_blank" rel="noopener noreferrer">Harsh Prajapati</a></span>
+          <span class="app-footer-meta">Unofficial &amp; open source (MIT) • 100% offline • Not affiliated with Amkette or EvoFox</span>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Remap Modal -->
+  <div class="modal-overlay" id="remapModal">
+    <div class="modal-surface is-wide" role="dialog" aria-modal="true" aria-labelledby="modalKeyTitle">
+      <div class="modal-header">
+        <h3 id="modalKeyTitle">Remap Key</h3>
+        <button class="modal-close-btn" id="btnCloseModal" aria-label="Close" data-tip="Close"><i data-icon="x"></i></button>
+      </div>
+      <p id="modalKeyInfo" class="modal-body-text"></p>
+      <div id="remapGroupsContainer"></div>
+    </div>
+  </div>
+
+  <!-- Factory Reset Confirmation Modal -->
+  <div class="modal-overlay" id="resetConfirmModal">
+    <div class="modal-surface" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="section-icon"><i data-icon="alert"></i></span>
+          <h3 id="resetTitle">Confirm Factory Reset</h3>
+        </div>
+        <button class="modal-close-btn" id="btnCloseResetModal" aria-label="Close" data-tip="Close"><i data-icon="x"></i></button>
+      </div>
+      <p class="modal-body-text">
+        Are you sure you want to restore factory defaults? This will erase all custom per-key RGB artwork, clear custom key remaps on both layers, reset the sleep timeout to 5 minutes, and revert lighting to Flow mode.
+      </p>
+      <div class="modal-actions">
+        <button class="btn-action-secondary" id="btnCancelReset">Cancel</button>
+        <button class="btn-action-danger is-solid" id="btnConfirmReset"><i data-icon="alert"></i> Restore Factory Defaults</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comprehensive Keyboard Quick Guide & Mode Reference Modal -->
+  <div class="modal-overlay" id="troubleshootModal">
+    <div class="modal-surface guide-modal-surface" role="dialog" aria-modal="true" aria-label="Hardware shortcuts and connection centre">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="section-icon"><i data-icon="fox"></i></span>
+          <div>
+            <h3>EvoFox Ronin 75% — Hardware Shortcuts & Connection Centre</h3>
+            <p class="modal-subtitle">
+              Verified against official EvoFox Ronin Wireless Quick Start Guide & Support Manual
+            </p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="btnCloseTroubleshoot" aria-label="Close Guide" data-tip="Close Guide"><i data-icon="x"></i></button>
+      </div>
+
+      <!-- Live Search Filter -->
+      <div class="guide-search-wrap">
+        <span class="guide-search-icon"><i data-icon="search" data-size="16"></i></span>
+        <input type="search" id="guideSearchInput" class="guide-search-input" placeholder="Search shortcuts (e.g. Bluetooth, 2.4G, RGB, Mac, battery, reset, knob)..." aria-label="Search shortcuts">
+                <kbd class="guide-search-kbd" aria-hidden="true">/</kbd>
+                <button type="button" class="guide-search-clear" data-clear="guideSearchInput" aria-label="Clear search" data-tip="Clear search" hidden><i data-icon="x" data-size="16"></i></button>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="guide-categories-nav" id="guideCatNav">
+        <button class="guide-cat-btn active" data-cat="all"><i data-icon="brand" data-size="16"></i> All Shortcuts</button>
+        <button class="guide-cat-btn" data-cat="connectivity"><i data-icon="signal" data-size="16"></i> Connection Modes</button>
+        <button class="guide-cat-btn" data-cat="detection"><i data-icon="battery" data-size="16"></i> Mode Check &amp; Battery</button>
+        <button class="guide-cat-btn" data-cat="backlight"><i data-icon="bulb" data-size="16"></i> Backlighting</button>
+        <button class="guide-cat-btn" data-cat="system"><i data-icon="settings" data-size="16"></i> OS Mode, Win Lock &amp; Reset</button>
+        <button class="guide-cat-btn" data-cat="hardware"><i data-icon="knob" data-size="16"></i> Volume Knob & Switches</button>
+        <button class="guide-cat-btn" data-cat="multimedia"><i data-icon="music" data-size="16"></i> Media Keys (F-Row)</button>
+      </div>
+
+      <!-- Dynamic Shortcuts List Container -->
+      <div class="guide-shortcuts-list" id="guideShortcutsContainer"></div>
+
+      <!-- Quick Onboarding & Troubleshooting Step-by-Step Card -->
+      <div class="guide-onboarding">
+        <div class="guide-onboarding-head">
+          <span class="guide-onboarding-title"><i data-icon="sparkle"></i> Quick Onboarding: Connecting to this WebHID App</span>
+          <a href="https://www.amkette.com/pages/evofox-ronin-wireless-keyboard-help" target="_blank" rel="noopener noreferrer" class="guide-onboarding-link">
+            Official Amkette Help Page <i data-icon="external" data-size="14"></i>
+          </a>
+        </div>
+        <div class="guide-onboarding-grid">
+          <div class="guide-onboarding-step">
+            <strong>1. Choose Mode on Keyboard</strong>
+            Press <strong>FN + 4</strong> for 2.4 GHz wireless or <strong>FN + 5</strong> for Type-C wired. (Hold FN to verify slot illumination).
+          </div>
+          <div class="guide-onboarding-step">
+            <strong>2. Plug in Hardware</strong>
+            Insert the 2.4G receiver into an available USB port, or plug the Type-C cable into the keyboard and your computer.
+          </div>
+          <div class="guide-onboarding-step">
+            <strong>3. Authorize Vendor Pipe</strong>
+            Click <strong>Connect Device</strong> and select <em>Unknown Device (1A2C:A157)</em> (Wired) or <em>2.4 Wireless Device</em> (Receiver).
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="guide-modal-footer">
+        <span class="guide-modal-footer-note">
+          <i data-icon="alert"></i> Bluetooth WebHID notice: Standard OS Bluetooth blocks raw vendor HID packets. Switch to 2.4G or Wired to customize.
+        </span>
+        <div class="modal-actions">
+          <button class="btn-action-secondary" id="btnCloseTroubleshootFooter">Close</button>
+          <button class="btn-action-primary" id="btnTroubleshootConnect">
+            <i data-icon="plug"></i> Connect Device via WebHID
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Incompatible Device Safety Modal -->
+  <div class="modal-backdrop" id="incompatibleModal">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="incompatibleTitle">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="section-icon"><i data-icon="alert"></i></span>
+          <div>
+            <h3 id="incompatibleTitle">Incompatible Hardware Detected</h3>
+            <p class="modal-subtitle">Hardware Safety Protection Guard</p>
+          </div>
+        </div>
+        <button class="modal-close" id="btnCloseIncompatibleModal" aria-label="Close" data-tip="Close"><i data-icon="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 0.85rem;">
+          This configurator is engineered exclusively for the <strong>Amkette EvoFox Ronin 75% Wireless Mechanical Keyboard</strong>.
+        </p>
+        <div class="callout is-danger">
+          <strong>Hardware Safety Guard:</strong> Writing proprietary Shinetek MCU instructions to an incompatible third-party keyboard or mouse could damage it or cause unexpected behavior. Only verified EvoFox Ronin hardware is accepted.
+        </div>
+        <div class="callout">
+          <div class="callout-title">Supported EvoFox Ronin Identifiers:</div>
+          <div>• <strong>Vendor ID:</strong> <code>0x1A2C</code> (Semico / Shinetek)</div>
+          <div>• <strong>Wired USB Mode:</strong> <code>0xA157</code> (FN + 5)</div>
+          <div>• <strong>2.4GHz Wireless Dongle:</strong> <code>0x8FF0</code> (FN + 4)</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-action-primary" id="btnAcknowledgeIncompatible">Understood</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branded Fullscreen Loading Screen Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-card" role="status" aria-live="polite">
+      <div class="brand-loader is-lg"><svg class="brand-ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="brand-ring-track" cx="60" cy="60" r="52"/><circle class="brand-ring-arc" cx="60" cy="60" r="52" pathLength="100"/></svg><span class="brand-fox" aria-hidden="true"></span></div>
+      <h3 class="loading-title" id="loadingTitle">Connecting to Device...</h3>
+      <p class="loading-desc" id="loadingDesc">Talking to your keyboard…</p>
+      <div class="loading-progress-wrap progress indeterminate" id="loadingProgressWrap" role="progressbar" aria-label="Working">
+        <div class="progress-track"><div class="progress-fill loading-progress-bar" id="loadingProgressBar"></div></div>
+      </div>
+      <p class="loading-reassure" id="loadingReassure" hidden></p>
+    </div>
+  </div>
+
+  <!-- File drop veil: import a profile backup by dropping a .json -->
+  <div class="drop-veil" id="dropVeil" hidden>
+    <div class="drop-card">
+      <i data-icon="upload" data-size="28"></i>
+      <strong>Drop a backup .json to import it</strong>
+      <span>It's added to Profiles &amp; Backup and loaded straight away.</span>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notifications -->
+  <div class="toasts" id="toastContainer" role="region" aria-label="Notifications"></div>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

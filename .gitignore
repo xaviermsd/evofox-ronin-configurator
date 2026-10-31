@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# OS / Environment Files
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
+
+# Editor / IDE
+.vscode/
+.idea/
+
+# Internal Research & Extraction Scratch Files
+raw_chunks/
+analysis_scripts/
+decompiled_protocol.js
+device_class.js
+extracted_logic.js
+*.png.tmp
+qsg_*.png
