@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://evofox-ronin-web-app.harshxgaming7781.workers.dev/">
+<a href="https://ronin.xaviermsd.workers.dev/">
   <img src="assets/readme/banner.webp" alt="EvoFox Ronin Web Configurator: set up your EvoFox Ronin right in the browser" width="100%">
 </a>
 
@@ -11,7 +11,7 @@ No install, no account, no tracking. Works offline once loaded.
 
 <sub>Unofficial fan project. Not affiliated with, endorsed by or sponsored by Amkette or EvoFox. EvoFox and Ronin are trademarks of their owners.</sub>
 
-[![Open the app](https://img.shields.io/badge/Open_the_app-%E2%86%92-D6FF36?style=for-the-badge&labelColor=080808)](https://evofox-ronin-web-app.harshxgaming7781.workers.dev/)
+[![Open the app](https://img.shields.io/badge/Open_the_app-%E2%86%92-D6FF36?style=for-the-badge&labelColor=080808)](https://ronin.xaviermsd.workers.dev/)
 [![WebHID](https://img.shields.io/badge/WebHID-Chrome_%C2%B7_Edge_%C2%B7_Brave_%C2%B7_Opera-58616F?style=for-the-badge&labelColor=080808)](https://wicg.github.io/webhid/)
 [![Zero dependencies](https://img.shields.io/badge/Dependencies-0-D6FF36?style=for-the-badge&labelColor=080808)](package.json)
 [![License: MIT](https://img.shields.io/badge/License-MIT-f7f8f4?style=for-the-badge&labelColor=080808)](LICENSE)
@@ -156,7 +156,7 @@ Every screen, button, notice and menu comes from one small design system, so the
 
 ## Quick start
 
-1. Open **[the app](https://evofox-ronin-web-app.harshxgaming7781.workers.dev/)** in **Chrome, Edge, Brave or Opera** on a computer.
+1. Open **[the app](https://ronin.xaviermsd.workers.dev/)** in **Chrome, Edge, Brave or Opera** on a computer.
 2. Connect the keyboard one of two ways:
    - **2.4 GHz:** take the receiver out of its slot on the keyboard, plug it into your computer, press <kbd>Fn</kbd> + <kbd>4</kbd>.
    - **Wired:** plug in the Type-C cable and press <kbd>Fn</kbd> + <kbd>5</kbd>.
@@ -427,6 +427,6 @@ All work in Chrome or Edge. On Linux you may need a udev rule for vendor <code>1
 
 Unofficial fan project, not affiliated with Amkette or EvoFox. EvoFox and Ronin are trademarks of their owners. Released under the [MIT License](LICENSE).
 
-[Open the app](https://evofox-ronin-web-app.harshxgaming7781.workers.dev/) · [Report a bug](https://github.com/xaviermsd/evofox-ronin-configurator/issues)
+[Open the app](https://ronin.xaviermsd.workers.dev/) · [Report a bug](https://github.com/xaviermsd/evofox-ronin-configurator/issues)
 
 </div>
