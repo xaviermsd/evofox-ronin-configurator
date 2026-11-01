@@ -1,10 +1,10 @@
 <div align="center">
 
+# EvoFox Ronin Web Configurator
+
 <a href="https://ronin.xaviermsd.workers.dev/">
   <img src="assets/readme/banner.webp" alt="EvoFox Ronin Web Configurator: set up your EvoFox Ronin right in the browser" width="100%">
 </a>
-
-# EvoFox Ronin Web Configurator
 
 **Set up your Amkette EvoFox Ronin 75% Wireless right in the browser.**<br>
 No install, no account, no tracking. Works offline once loaded.
@@ -42,15 +42,13 @@ Click **Connect Keyboard**, pick your Ronin in the browser prompt, and the app t
 
 The official EvoFox software runs from a cloud web page, every change needs another click on **Upload**, and there's no full guide to the Fn shortcuts. This app is a free, private alternative that talks to the keyboard directly from your browser.
 
-| | Official cloud software | This app |
-| :--- | :---: | :---: |
-| **Where it runs** | Cloud web page | **Your browser, fully offline after loading** |
-| **Tracking** | Unknown | **None. No account, no analytics** |
-| **Applying changes** | Click Upload every time | **Live Sync as you move a slider** |
-| **Preview** | Basic | **Live preview on an accurate Ronin** |
-| **Fn shortcuts guide** | Not included | **Every shortcut, searchable, works on phones** |
-| **After a page reload** | Start over | **Reconnects and remembers your settings** |
-| **Wrong device picked** | Silent failure | **Clear warning, nothing is sent** |
+- **Where it runs**<br>Official cloud software: Cloud web page<br>This app: **Your browser, fully offline after loading**
+- **Tracking**<br>Official cloud software: Unknown<br>This app: **None. No account, no analytics**
+- **Applying changes**<br>Official cloud software: Click Upload every time<br>This app: **Live Sync as you move a slider**
+- **Preview**<br>Official cloud software: Basic<br>This app: **Live preview on an accurate Ronin**
+- **Fn shortcuts guide**<br>Official cloud software: Not included<br>This app: **Every shortcut, searchable, works on phones**
+- **After a page reload**<br>Official cloud software: Start over<br>This app: **Reconnects and remembers your settings**
+- **Wrong device picked**<br>Official cloud software: Silent failure<br>This app: **Clear warning, nothing is sent**
 
 ---
 
@@ -90,22 +88,17 @@ The official EvoFox software runs from a cloud web page, every change needs anot
 
 ### Settings, battery and profiles
 
-<table>
-  <tr>
-    <td width="50%"><img src="assets/readme/screen-settings.webp" alt="Device settings: sleep timer, key response time, Fn layer mode and factory reset"></td>
-    <td width="50%"><img src="assets/readme/screen-profiles.webp" alt="Profiles: save, switch, export and import"></td>
-  </tr>
-  <tr>
-    <td>
-      <b>Device settings</b><br>
-      Sleep timer (2 / 15 / 30 min, or never), key response time (Level 1 is fastest: 2–3 ms wired), Fn layer mode (hold or press once) and factory reset. Every option is a branded dropdown that works with mouse, keyboard and screen readers.
-    </td>
-    <td>
-      <b>Profiles and backup</b><br>
-      Save as many profiles as you like in your browser, switch between them, and export or import them as JSON files. Drag a file onto the app to import it.
-    </td>
-  </tr>
-</table>
+**Device settings**
+
+<img src="assets/readme/screen-settings.webp" alt="Device settings: sleep timer, key response time, Fn layer mode and factory reset">
+
+Sleep timer (2 / 15 / 30 min, or never), key response time (Level 1 is fastest: 2–3 ms wired), Fn layer mode (hold or press once) and factory reset. Every option is a branded dropdown that works with mouse, keyboard and screen readers.
+
+**Profiles and backup**
+
+<img src="assets/readme/screen-profiles.webp" alt="Profiles: save, switch, export and import">
+
+Save as many profiles as you like in your browser, switch between them, and export or import them as JSON files. Drag a file onto the app to import it.
 
 The dashboard shows **battery level, charging, connection type and firmware version**, refreshed automatically.
 
@@ -115,12 +108,9 @@ The dashboard shows **battery level, charging, connection type and firmware vers
 
 ### Shortcuts guide, on any screen
 
-<table>
-  <tr>
-    <td width="58%"><img src="assets/readme/screen-guide.webp" alt="Shortcuts and guide page"></td>
-    <td width="42%"><img src="assets/readme/screen-mobile.webp" alt="The app on a phone: welcome screen and shortcuts guide"></td>
-  </tr>
-</table>
+<img src="assets/readme/screen-guide.webp" alt="Shortcuts and guide page">
+
+<img src="assets/readme/screen-mobile.webp" alt="The app on a phone: welcome screen and shortcuts guide">
 
 Every Fn shortcut and physical control from the official quick start guide, searchable. Phones can't configure the keyboard (no WebHID on mobile), but the guide works there, so you can look up a shortcut mid-game.
 
@@ -128,11 +118,21 @@ Every Fn shortcut and physical control from the official quick start guide, sear
 <summary><b>More screens</b> (click to open)</summary>
 <br>
 
-| Welcome | RGB Lighting |
-| :---: | :---: |
-| <img src="assets/readme/screen-welcome.webp" alt="Welcome screen"> | <img src="assets/readme/screen-rgb.webp" alt="RGB Lighting tab"> |
-| **Key Remapping** | **Custom RGB** |
-| <img src="assets/readme/screen-remap.webp" alt="Key Remapping tab"> | <img src="assets/readme/screen-custom.webp" alt="Custom RGB tab"> |
+**Welcome**
+
+<img src="assets/readme/screen-welcome.webp" alt="Welcome screen">
+
+**RGB Lighting**
+
+<img src="assets/readme/screen-rgb.webp" alt="RGB Lighting tab">
+
+**Key Remapping**
+
+<img src="assets/readme/screen-remap.webp" alt="Key Remapping tab">
+
+**Custom RGB**
+
+<img src="assets/readme/screen-custom.webp" alt="Custom RGB tab">
 
 </details>
 
@@ -142,15 +142,13 @@ Every Fn shortcut and physical control from the official quick start guide, sear
 
 Every screen, button, notice and menu comes from one small design system, so the app feels like a single product rather than a set of pages.
 
-| | |
-| :--- | :--- |
-| **Colour** | Four brand colours: Electric Lime `#D6FF36`, Ink `#080808`, Warm White `#F7F8F4`, Slate `#58616F`. Lime marks what's active or successful, ink carries text and borders, and amber and red are kept only for warnings and errors. All colours live in one file (`src/tokens.css`); text contrast is at least 5.4 : 1. |
-| **Type** | Geist and Geist Mono, bundled with the app (no font CDN). |
-| **Signature style** | Ink borders and a hard offset shadow on primary buttons, the active sidebar item, open dropdowns and toasts. |
-| **Loading and feedback** | One shared system: a first-load splash; buttons that switch to *Connecting…*, *Applying…* or *Saving…* and ignore double clicks; a small overlay on just the card that's busy; a full-screen loader only for connecting and factory reset. Toasts appear only after the keyboard has really confirmed success or failure. |
-| **Dropdowns** | Custom lime-branded menus instead of the browser's default ones: animated, with a check on the chosen option, type-ahead, full arrow-key support and proper screen-reader labels. |
-| **Motion** | Short, purposeful transitions. With *reduce motion* turned on in your system settings, animations slow down or stop. |
-| **Accessibility** | Every control is reachable by keyboard with a visible focus ring; labels and live status are announced to screen readers. |
+- **Colour**<br>Four brand colours: Electric Lime `#D6FF36`, Ink `#080808`, Warm White `#F7F8F4`, Slate `#58616F`. Lime marks what's active or successful, ink carries text and borders, and amber and red are kept only for warnings and errors. All colours live in one file (`src/tokens.css`); text contrast is at least 5.4 : 1.
+- **Type**<br>Geist and Geist Mono, bundled with the app (no font CDN).
+- **Signature style**<br>Ink borders and a hard offset shadow on primary buttons, the active sidebar item, open dropdowns and toasts.
+- **Loading and feedback**<br>One shared system: a first-load splash; buttons that switch to *Connecting…*, *Applying…* or *Saving…* and ignore double clicks; a small overlay on just the card that's busy; a full-screen loader only for connecting and factory reset. Toasts appear only after the keyboard has really confirmed success or failure.
+- **Dropdowns**<br>Custom lime-branded menus instead of the browser's default ones: animated, with a check on the chosen option, type-ahead, full arrow-key support and proper screen-reader labels.
+- **Motion**<br>Short, purposeful transitions. With *reduce motion* turned on in your system settings, animations slow down or stop.
+- **Accessibility**<br>Every control is reachable by keyboard with a visible focus ring; labels and live status are announced to screen readers.
 
 ---
 
