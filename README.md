@@ -92,7 +92,7 @@ The official EvoFox software runs from a cloud web page, every change needs anot
 
 <img src="assets/readme/screen-settings.webp" alt="Device settings: sleep timer, key response time, Fn layer mode and factory reset">
 
-Sleep timer (2 / 15 / 30 min, or never), key response time (Level 1 is fastest: 2–3 ms wired), Fn layer mode (hold or press once) and factory reset. Every option is a branded dropdown that works with mouse, keyboard and screen readers.
+Sleep timer (2 / 15 / 30 min, or never), key response time (Level 1 is fastest: 2 to 3 ms wired), Fn layer mode (hold or press once) and factory reset. Every option is a branded dropdown that works with mouse, keyboard and screen readers.
 
 **Profiles and backup**
 
@@ -164,7 +164,7 @@ Every screen, button, notice and menu comes from one small design system, so the
 > **Bluetooth can't be used for setup.** Operating systems don't let browsers send settings to a keyboard over Bluetooth. Switch to 2.4 GHz or wired, change your settings, then switch back. Your settings stay on the keyboard.
 
 > [!TIP]
-> **Not sure which mode you're in?** Hold <kbd>Fn</kbd> on its own: key <kbd>1</kbd>–<kbd>3</kbd> (Bluetooth), <kbd>4</kbd> (2.4 GHz) or <kbd>5</kbd> (wired) lights up.
+> **Not sure which mode you're in?** Hold <kbd>Fn</kbd> on its own: key <kbd>1</kbd> to <kbd>3</kbd> (Bluetooth), <kbd>4</kbd> (2.4 GHz) or <kbd>5</kbd> (wired) lights up.
 
 | Browser | Works? |
 | :--- | :---: |
@@ -198,7 +198,7 @@ From the official **Amkette EvoFox Ronin Wireless quick start guide**.
 
 | Shortcut | What it does |
 | :--- | :--- |
-| <kbd>Fn</kbd> + <kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd> | Bluetooth slot 1 / 2 / 3. **Hold 3–5 s** to pair (the key blinks fast). |
+| <kbd>Fn</kbd> + <kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd> | Bluetooth slot 1 / 2 / 3. **Hold 3 to 5 s** to pair (the key blinks fast). |
 | <kbd>Fn</kbd> + <kbd>4</kbd> | 2.4 GHz wireless. **Hold** if the receiver needs re-pairing (LED blinks fast). |
 | <kbd>Fn</kbd> + <kbd>5</kbd> | Wired (Type-C). The cable also charges the battery. |
 
@@ -317,10 +317,10 @@ Byte 6..64  Parameters
 | Lighting off | `0x05` | B6 = 1 |
 | Remap key | `0x04` | B6 layer + 1, B7 source key HID code, B8 target HID code |
 | Per-key colour: start | `0x0B` | prepares the per-key buffer |
-| Per-key colour: data | `0xF6`–`0xFB` | six 54-byte blocks of RGB |
+| Per-key colour: data | `0xF6` to `0xFB` | six 54-byte blocks of RGB |
 | Per-key colour: save | `0x0A` | stores the colours on the keyboard |
 | Sleep timer | `0x0C` | B6 1 = 2/30 min, 2 = 15/40 min, 3 = 30/60 min, 4 = never |
-| Key response | `0x0D` | B6 1 = fastest (wired 2–3 ms), 2 = 4–5 ms, 3 = 6–7 ms |
+| Key response | `0x0D` | B6 1 = fastest (wired 2 to 3 ms), 2 = 4 to 5 ms, 3 = 6 to 7 ms |
 | Fn layer mode | `0x10` | B6 0 = hold Fn, 1 = press once |
 | Factory reset | `0x08` | none |
 | Clear macros | `0x0F` | none |
@@ -328,7 +328,7 @@ Byte 6..64  Parameters
 **Status reply** (only replies with command byte `0x0E` are read as status, as in the official driver):
 
 ```javascript
-const battery   = data[5];                                   // 0–100 %
+const battery   = data[5];                                   // 0 to 100 %
 const mode      = data[6] === 3 ? 'USB' : data[6] === 1 ? '2.4G' : 'keyboard not linked';
 const charging  = data[7] === 1;
 const vendorId  = (data[8] << 8) | data[9];                  // 0x1A2C
