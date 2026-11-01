@@ -61,7 +61,7 @@ server.listen(PORT, () => {
   console.log(` 🦊 EVOFOX RONIN WIRELESS WEBHID STUDIO`);
   console.log(`===============================================================`);
   console.log(` Author:       Harsh Prajapati`);
-  console.log(` Instagram:    https://www.instagram.com/harshprajapatiofficial/`);
+  console.log(` GitHub:       https://github.com/xaviermsd`);
   console.log(` Repository:   https://github.com/xaviermsd/evofox-ronin-configurator`);
   console.log(` Local Server: ${url}`);
   console.log(` WebHID API:   Enabled (Chrome / Edge / Opera / Brave)`);

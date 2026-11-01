@@ -421,7 +421,7 @@ All work in Chrome or Edge. On Linux you may need a udev rule for vendor <code>1
 
 <div align="center">
 
-**Made with ❤️ by [Harsh Prajapati](https://www.instagram.com/harshprajapatiofficial/)**
+**Made with ❤️ by [Harsh Prajapati](https://github.com/xaviermsd)**
 
 Unofficial fan project, not affiliated with Amkette or EvoFox. EvoFox and Ronin are trademarks of their owners. Released under the [MIT License](LICENSE).
 
